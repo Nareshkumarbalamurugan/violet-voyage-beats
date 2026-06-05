@@ -1,29 +1,33 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Navbar } from "@/components/Navbar";
+import { Hero } from "@/components/Hero";
+import { CountryStory } from "@/components/CountryStory";
+import { Planner } from "@/components/Planner";
+import { Footer } from "@/components/Footer";
+import { countries } from "@/data/countries";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "Violet Voyage — Travel Beyond Borders" },
+      { name: "description", content: "Discover destinations through experiences, flavors, cultures, and sounds. A cinematic travel platform." },
+      { property: "og:title", content: "Violet Voyage — Travel Beyond Borders" },
+      { property: "og:description", content: "Discover destinations through experiences, flavors, cultures, and sounds." },
     ],
   }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="relative bg-background text-foreground" id="destinations">
+      <Navbar />
+      <Hero />
+      {countries.map((c, i) => (
+        <CountryStory key={c.id} country={c} index={i} />
+      ))}
+      <Planner />
+      <Footer />
+    </main>
   );
 }
