@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "@tanstack/react-router";
 import heroImg from "@/assets/hero.jpg";
 
 export function Hero() {
@@ -67,13 +68,13 @@ export function Hero() {
           transition={{ delay: 0.85, duration: 0.8 }}
           className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <a
-            href="#destinations"
+          <Link
+            to="/explore"
             className="group relative inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-sm font-medium text-primary-foreground shadow-glow transition-transform hover:scale-[1.03]"
           >
             Start Exploring
             <span className="ml-2 transition-transform group-hover:translate-x-1">→</span>
-          </a>
+          </Link>
           <a
             href="#plan"
             className="inline-flex items-center justify-center rounded-full glass px-8 py-4 text-sm font-medium hover:bg-white/10 transition-colors"
