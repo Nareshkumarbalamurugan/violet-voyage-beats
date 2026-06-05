@@ -11,9 +11,12 @@ export type Country = {
   description: string;
   image: string;
   foods: string[];
-  music: { genre: string; mood: string }[];
+  music: { genre: string; mood: string; track: string }[];
   accent: string;
 };
+
+const sample = (n: number) =>
+  `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-${n}.mp3`;
 
 export const countries: Country[] = [
   {
@@ -25,9 +28,9 @@ export const countries: Country[] = [
     image: japan,
     foods: ["Sushi", "Ramen", "Tempura", "Mochi"],
     music: [
-      { genre: "City Pop", mood: "Nostalgic neon nights" },
-      { genre: "J-Pop", mood: "Bright & electric" },
-      { genre: "Koto", mood: "Ancient stillness" },
+      { genre: "City Pop", mood: "Nostalgic neon nights", track: sample(1) },
+      { genre: "J-Pop", mood: "Bright & electric", track: sample(2) },
+      { genre: "Koto", mood: "Ancient stillness", track: sample(3) },
     ],
     accent: "from-pink-300/40 to-violet-500/40",
   },
@@ -40,9 +43,9 @@ export const countries: Country[] = [
     image: france,
     foods: ["Croissant", "Coq au Vin", "Ratatouille", "Macaron"],
     music: [
-      { genre: "French Jazz", mood: "Smoke & velvet" },
-      { genre: "Café Acoustic", mood: "Sunday mornings" },
-      { genre: "Chanson", mood: "Romantic murmurs" },
+      { genre: "French Jazz", mood: "Smoke & velvet", track: sample(4) },
+      { genre: "Café Acoustic", mood: "Sunday mornings", track: sample(5) },
+      { genre: "Chanson", mood: "Romantic murmurs", track: sample(6) },
     ],
     accent: "from-amber-300/40 to-violet-500/40",
   },
@@ -55,9 +58,9 @@ export const countries: Country[] = [
     image: italy,
     foods: ["Pizza Napoletana", "Pasta Carbonara", "Risotto", "Gelato"],
     music: [
-      { genre: "Italian Pop", mood: "Coastal summers" },
-      { genre: "Opera", mood: "Grand & timeless" },
-      { genre: "Neo-Folk", mood: "Tuscan evenings" },
+      { genre: "Italian Pop", mood: "Coastal summers", track: sample(7) },
+      { genre: "Opera", mood: "Grand & timeless", track: sample(8) },
+      { genre: "Neo-Folk", mood: "Tuscan evenings", track: sample(9) },
     ],
     accent: "from-orange-300/40 to-violet-500/40",
   },
@@ -70,9 +73,9 @@ export const countries: Country[] = [
     image: korea,
     foods: ["Bibimbap", "Korean BBQ", "Tteokbokki", "Bingsu"],
     music: [
-      { genre: "K-Pop", mood: "High-gloss euphoria" },
-      { genre: "Korean Indie", mood: "Late-night reflection" },
-      { genre: "R&B", mood: "Soft & smoldering" },
+      { genre: "K-Pop", mood: "High-gloss euphoria", track: sample(10) },
+      { genre: "Korean Indie", mood: "Late-night reflection", track: sample(11) },
+      { genre: "R&B", mood: "Soft & smoldering", track: sample(12) },
     ],
     accent: "from-fuchsia-400/40 to-violet-600/40",
   },
@@ -85,9 +88,9 @@ export const countries: Country[] = [
     image: brazil,
     foods: ["Feijoada", "Açaí Bowl", "Pão de Queijo", "Moqueca"],
     music: [
-      { genre: "Bossa Nova", mood: "Warm & weightless" },
-      { genre: "Samba", mood: "Carnival energy" },
-      { genre: "MPB", mood: "Sun-soaked soul" },
+      { genre: "Bossa Nova", mood: "Warm & weightless", track: sample(13) },
+      { genre: "Samba", mood: "Carnival energy", track: sample(14) },
+      { genre: "MPB", mood: "Sun-soaked soul", track: sample(15) },
     ],
     accent: "from-emerald-300/40 to-violet-500/40",
   },

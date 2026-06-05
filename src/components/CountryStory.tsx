@@ -1,6 +1,8 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { Link } from "@tanstack/react-router";
 import type { Country } from "@/data/countries";
+import { MusicList } from "./MusicList";
 
 export function CountryStory({ country, index }: { country: Country; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -80,6 +82,22 @@ export function CountryStory({ country, index }: { country: Country; index: numb
           >
             {country.description}
           </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-20%" }}
+            transition={{ duration: 0.9, delay: 0.35 }}
+            className="mt-8"
+          >
+            <Link
+              to="/country/$id"
+              params={{ id: country.id }}
+              className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-glow transition-transform hover:scale-[1.03]"
+            >
+              Explore {country.name}
+              <span className="transition-transform group-hover:translate-x-1">→</span>
+            </Link>
+          </motion.div>
         </div>
 
         {/* Cards */}
@@ -114,33 +132,8 @@ export function CountryStory({ country, index }: { country: Country; index: numb
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-20%" }}
             transition={{ duration: 0.8, delay: 0.35 }}
-            className="glass rounded-3xl p-6 shadow-soft"
           >
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm uppercase tracking-[0.2em] text-muted-foreground">
-                Sound of {country.name}
-              </h3>
-              <span className="text-xs text-lavender">Music</span>
-            </div>
-            <ul className="divide-y divide-white/5">
-              {country.music.map((m, i) => (
-                <li key={m.genre} className="flex items-center gap-4 py-3">
-                  <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-primary to-accent text-sm font-semibold">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div className="flex-1">
-                    <p className="font-medium">{m.genre}</p>
-                    <p className="text-xs text-muted-foreground">{m.mood}</p>
-                  </div>
-                  <button
-                    aria-label={`Play ${m.genre}`}
-                    className="grid h-9 w-9 place-items-center rounded-full bg-white/10 hover:bg-primary transition-colors"
-                  >
-                    ▶
-                  </button>
-                </li>
-              ))}
-            </ul>
+            <MusicList tracks={country.music} title={`Sound of ${country.name}`} />
           </motion.div>
         </div>
       </motion.div>
