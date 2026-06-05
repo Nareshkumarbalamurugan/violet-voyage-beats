@@ -97,7 +97,7 @@ function CountryPage() {
               <span className="text-xs text-lavender">Food</span>
             </div>
             <div className="flex flex-wrap gap-2">
-              {country.foods.map((f) => (
+              {country.foods.map((f: string) => (
                 <span
                   key={f}
                   className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm"
