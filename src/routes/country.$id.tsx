@@ -1,9 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { countries } from "@/data/countries";
-import { MusicList } from "@/components/MusicList";
+import type { Food } from "@/data/countries";
+import { MusicPlatforms } from "@/components/MusicPlatforms";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { BackButton } from "@/components/BackButton";
 
 export const Route = createFileRoute("/country/$id")({
   loader: ({ params }) => {
@@ -40,6 +42,10 @@ function CountryPage() {
   return (
     <main className="relative min-h-screen bg-background text-foreground">
       <Navbar />
+
+      <div className="absolute left-6 top-24 z-20">
+        <BackButton />
+      </div>
 
       {/* Hero */}
       <section className="relative flex min-h-[90vh] items-end overflow-hidden">
@@ -96,21 +102,35 @@ function CountryPage() {
               </h3>
               <span className="text-xs text-lavender">Food</span>
             </div>
-            <div className="flex flex-wrap gap-2">
-              {country.foods.map((f: string) => (
-                <span
-                  key={f}
-                  className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm"
+            <div className="grid grid-cols-2 gap-3">
+              {country.foods.map((f: Food) => (
+                <Link
+                  key={f.id}
+                  to="/country/$id/food/$foodId"
+                  params={{ id: country.id, foodId: f.id }}
+                  className="group relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10"
                 >
-                  {f}
-                </span>
+                  <img
+                    src={f.image}
+                    alt={f.name}
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent" />
+                  <div className="relative z-10 flex h-full flex-col justify-end p-3">
+                    <p className="text-sm font-semibold">{f.name}</p>
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-lavender">
+                      {f.specialty}
+                    </p>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>
         </div>
 
         <div>
-          <MusicList tracks={country.music} title={`Sound of ${country.name}`} />
+          <MusicPlatforms countryName={country.name} music={country.music} />
         </div>
       </section>
 

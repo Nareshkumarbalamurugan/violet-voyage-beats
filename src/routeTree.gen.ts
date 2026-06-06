@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CountryIdRouteImport } from './routes/country.$id'
+import { Route as CountryIdFoodFoodIdRouteImport } from './routes/country.$id.food.$foodId'
 
 const ExploreRoute = ExploreRouteImport.update({
   id: '/explore',
@@ -28,35 +29,48 @@ const CountryIdRoute = CountryIdRouteImport.update({
   path: '/country/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CountryIdFoodFoodIdRoute = CountryIdFoodFoodIdRouteImport.update({
+  id: '/food/$foodId',
+  path: '/food/$foodId',
+  getParentRoute: () => CountryIdRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/explore': typeof ExploreRoute
-  '/country/$id': typeof CountryIdRoute
+  '/country/$id': typeof CountryIdRouteWithChildren
+  '/country/$id/food/$foodId': typeof CountryIdFoodFoodIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/explore': typeof ExploreRoute
-  '/country/$id': typeof CountryIdRoute
+  '/country/$id': typeof CountryIdRouteWithChildren
+  '/country/$id/food/$foodId': typeof CountryIdFoodFoodIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/explore': typeof ExploreRoute
-  '/country/$id': typeof CountryIdRoute
+  '/country/$id': typeof CountryIdRouteWithChildren
+  '/country/$id/food/$foodId': typeof CountryIdFoodFoodIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/explore' | '/country/$id'
+  fullPaths: '/' | '/explore' | '/country/$id' | '/country/$id/food/$foodId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/explore' | '/country/$id'
-  id: '__root__' | '/' | '/explore' | '/country/$id'
+  to: '/' | '/explore' | '/country/$id' | '/country/$id/food/$foodId'
+  id:
+    | '__root__'
+    | '/'
+    | '/explore'
+    | '/country/$id'
+    | '/country/$id/food/$foodId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ExploreRoute: typeof ExploreRoute
-  CountryIdRoute: typeof CountryIdRoute
+  CountryIdRoute: typeof CountryIdRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -82,13 +96,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CountryIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/country/$id/food/$foodId': {
+      id: '/country/$id/food/$foodId'
+      path: '/food/$foodId'
+      fullPath: '/country/$id/food/$foodId'
+      preLoaderRoute: typeof CountryIdFoodFoodIdRouteImport
+      parentRoute: typeof CountryIdRoute
+    }
   }
 }
+
+interface CountryIdRouteChildren {
+  CountryIdFoodFoodIdRoute: typeof CountryIdFoodFoodIdRoute
+}
+
+const CountryIdRouteChildren: CountryIdRouteChildren = {
+  CountryIdFoodFoodIdRoute: CountryIdFoodFoodIdRoute,
+}
+
+const CountryIdRouteWithChildren = CountryIdRoute._addFileChildren(
+  CountryIdRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ExploreRoute: ExploreRoute,
-  CountryIdRoute: CountryIdRoute,
+  CountryIdRoute: CountryIdRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

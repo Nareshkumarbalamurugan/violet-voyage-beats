@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "@tanstack/react-router";
 import type { Country } from "@/data/countries";
-import { MusicList } from "./MusicList";
+import { MusicPlatforms } from "./MusicPlatforms";
 
 export function CountryStory({ country, index }: { country: Country; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -117,12 +117,14 @@ export function CountryStory({ country, index }: { country: Country; index: numb
             </div>
             <div className="flex flex-wrap gap-2">
               {country.foods.map((f) => (
-                <span
-                  key={f}
-                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm"
+                <Link
+                  key={f.id}
+                  to="/country/$id/food/$foodId"
+                  params={{ id: country.id, foodId: f.id }}
+                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm transition-colors hover:bg-primary/30 hover:border-primary/40"
                 >
-                  {f}
-                </span>
+                  {f.name}
+                </Link>
               ))}
             </div>
           </motion.div>
@@ -133,7 +135,7 @@ export function CountryStory({ country, index }: { country: Country; index: numb
             viewport={{ once: true, margin: "-20%" }}
             transition={{ duration: 0.8, delay: 0.35 }}
           >
-            <MusicList tracks={country.music} title={`Sound of ${country.name}`} />
+            <MusicPlatforms countryName={country.name} music={country.music} />
           </motion.div>
         </div>
       </motion.div>

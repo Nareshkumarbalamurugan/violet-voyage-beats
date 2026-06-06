@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { countries } from "@/data/countries";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { BackButton } from "@/components/BackButton";
 
 export const Route = createFileRoute("/explore")({
   head: () => ({
@@ -22,6 +23,10 @@ function ExplorePage() {
   return (
     <main className="relative min-h-screen bg-background text-foreground">
       <Navbar />
+
+      <div className="absolute left-6 top-24 z-20">
+        <BackButton label="Home" />
+      </div>
 
       <section className="relative mx-auto max-w-7xl px-6 pt-40 pb-16">
         <motion.p
