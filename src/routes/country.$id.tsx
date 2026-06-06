@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { countries } from "@/data/countries";
+import type { Food } from "@/data/countries";
 import { MusicPlatforms } from "@/components/MusicPlatforms";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -102,7 +103,7 @@ function CountryPage() {
               <span className="text-xs text-lavender">Food</span>
             </div>
             <div className="grid grid-cols-2 gap-3">
-              {country.foods.map((f) => (
+              {country.foods.map((f: Food) => (
                 <Link
                   key={f.id}
                   to="/country/$id/food/$foodId"
