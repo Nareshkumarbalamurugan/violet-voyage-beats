@@ -33,17 +33,7 @@ export function MusicPlatforms({
         <h3 className="text-sm uppercase tracking-[0.2em] text-muted-foreground">
           Sound of {countryName}
         </h3>
-        <span className="text-xs text-lavender">Listen</span>
       </div>
-
-      <ul className="mb-6 space-y-2">
-        {music.map((m) => (
-          <li key={m.genre} className="flex items-baseline justify-between gap-4">
-            <span className="font-medium">{m.genre}</span>
-            <span className="text-xs text-muted-foreground">{m.mood}</span>
-          </li>
-        ))}
-      </ul>
 
       <div className="grid grid-cols-2 gap-3">
         <a
