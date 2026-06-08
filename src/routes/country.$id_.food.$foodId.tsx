@@ -6,7 +6,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { BackButton } from "@/components/BackButton";
 
-export const Route = createFileRoute("/country/$id/food/$foodId")({
+export const Route = createFileRoute("/country/$id_/food/$foodId")({
   loader: ({ params }) => {
     const country = countries.find((c) => c.id === params.id);
     if (!country) throw notFound();
@@ -50,33 +50,39 @@ function FoodPage() {
         <BackButton />
       </div>
 
-      {/* Hero */}
-      <section className="relative flex min-h-[80vh] items-end overflow-hidden">
-        <motion.img
-          src={food.image}
-          alt={food.name}
-          initial={{ scale: 1.2 }}
-          animate={{ scale: 1.05 }}
-          transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute inset-0 h-full w-full object-cover"
+      {/* Hero — image-free gradient stage */}
+      <section className="relative flex min-h-[70vh] items-end overflow-hidden bg-background">
+        {/* Animated aurora backdrop */}
+        <div className="absolute inset-0 bg-aurora" />
+        <div className={`absolute inset-0 bg-gradient-to-tr ${country.accent} opacity-60`} />
+        <motion.div
+          aria-hidden
+          className="absolute -left-32 top-10 h-[26rem] w-[26rem] rounded-full bg-primary/25 blur-[120px]"
+          animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.85, 0.5] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80" />
-        <div className={`absolute inset-0 bg-gradient-to-tr ${country.accent} mix-blend-soft-light`} />
+        <motion.div
+          aria-hidden
+          className="absolute -right-24 bottom-0 h-[30rem] w-[30rem] rounded-full bg-accent/20 blur-[130px]"
+          animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.7, 0.4] }}
+          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background" />
 
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-20">
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-20 pt-40">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="mb-4 text-xs uppercase tracking-[0.3em] text-gold"
+            className="mb-5 inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs uppercase tracking-[0.3em] text-gold"
           >
-            {country.flag} {country.name} · Signature Flavor
+            <span className="text-base leading-none">{country.flag}</span> {country.name} · Signature Flavor
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="text-6xl md:text-8xl font-semibold leading-[0.9]"
+            className="text-6xl md:text-8xl font-semibold leading-[0.9] text-gradient-gold"
           >
             {food.name}
           </motion.h1>
@@ -84,7 +90,7 @@ function FoodPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.2 }}
-            className="mt-6 max-w-2xl text-2xl md:text-3xl text-gradient-violet font-display"
+            className="mt-6 max-w-2xl text-2xl md:text-3xl text-foreground/85 font-display"
           >
             {food.specialty}
           </motion.p>
@@ -143,7 +149,7 @@ function FoodPage() {
                 whileInView={{ width: `${food.popularity}%` }}
                 viewport={{ once: true }}
                 transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-                className="h-full rounded-full bg-gradient-to-r from-violet to-gold"
+                className="h-full rounded-full bg-gradient-to-r from-primary to-accent"
               />
             </div>
           </div>

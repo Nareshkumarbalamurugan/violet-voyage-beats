@@ -99,6 +99,9 @@ const a = (attr: AttrInput): Attraction => ({
   image: img(attr.query ?? attr.name, "landmark"),
 });
 
+/* Scenic landscape image for countries that don't ship a bundled asset */
+const place = (q: string) => img(q, "landscape,travel");
+
 export const countries: Country[] = [
   {
     id: "japan",
@@ -606,6 +609,194 @@ export const countries: Country[] = [
       customs: ["Beach culture", "Churrasco barbecues", "Samba circles (roda)"],
     },
     accent: "from-emerald-300/40 to-violet-500/40",
+  },
+
+  /* ─────────────── INDIA ─────────────── */
+  {
+    id: "india",
+    name: "India",
+    flag: "🇮🇳",
+    tagline: "A Million Stories, One Land.",
+    description:
+      "From snow-dusted Himalayas to spice-scented bazaars and palaces of marble — a sensory symphony of color, faith, and flavour.",
+    image: place("india taj mahal"),
+    rating: 4.7,
+    bestSeason: "Oct–Mar (cool & dry)",
+    budget: "$",
+    budgetLabel: "Budget-friendly",
+    cities: ["Delhi", "Jaipur", "Varanasi", "Mumbai"],
+    region: "South Asia",
+    visa: "eVisa (30/90 days)",
+    safety: 71,
+    timezone: "IST (UTC+5:30)",
+    foods: [
+      f({ name: "Masala Dosa", specialty: "Crispy fermented crepe", description: "A golden, paper-thin rice-and-lentil crepe wrapped around spiced potato, served with coconut chutney and sambar.", ingredients: ["Rice batter", "Urad dal", "Potato", "Mustard seeds", "Curry leaves"], priceRange: "$", diet: "Vegetarian", spice: 2, calories: "~390 kcal", popularity: 94, restaurants: ["MTR (Bengaluru)", "Saravana Bhavan"], streetFood: ["South Indian tiffin stalls", "Railway platform vendors"] }),
+      f({ name: "Butter Chicken", specialty: "Velvet tomato gravy", description: "Tandoor-charred chicken simmered in a silky tomato-butter sauce kissed with fenugreek and cream.", ingredients: ["Chicken", "Tomato", "Butter", "Cream", "Garam masala"], priceRange: "$$", diet: "Non-Vegetarian", spice: 2, calories: "~490 kcal", popularity: 96, restaurants: ["Moti Mahal (Delhi)", "Bukhara"], streetFood: ["Dhaba highway kitchens"] }),
+      f({ name: "Pani Puri", specialty: "Explosive street bite", description: "Hollow crisp shells filled with spiced potato and tangy tamarind water that bursts in one glorious mouthful.", ingredients: ["Semolina puri", "Tamarind water", "Potato", "Chickpeas", "Mint"], priceRange: "$", diet: "Vegetarian", spice: 3, calories: "~150 kcal", popularity: 92, restaurants: ["Elco Market (Mumbai)"], streetFood: ["Chaat carts everywhere", "Evening bazaar stalls"] }),
+    ],
+    music: [
+      { genre: "Bollywood", mood: "Cinematic & euphoric", type: "Modern", artists: ["A. R. Rahman", "Arijit Singh"] },
+      { genre: "Hindustani Classical", mood: "Meditative ragas", type: "Traditional", artists: ["Ravi Shankar", "Zakir Hussain"] },
+      { genre: "Bhangra", mood: "Punjabi festival energy", type: "Festival", artists: ["Daler Mehndi"] },
+    ],
+    attractions: [
+      a({ name: "Taj Mahal", category: "Historical", description: "An ivory-white marble mausoleum of eternal love, glowing at dawn.", location: "Agra", ticket: "₹1100 (foreigners)", hours: "Sunrise–sunset (closed Fri)", bestTime: "Sunrise", tip: "Enter from the east gate to beat queues.", unesco: true, query: "taj mahal" }),
+      a({ name: "Amber Fort", category: "Historical", description: "A honey-hued hilltop fortress of mirrored halls above Jaipur.", location: "Jaipur", ticket: "₹500", hours: "8am–6pm", bestTime: "Morning", tip: "Catch the evening light & sound show.", query: "amber fort jaipur" }),
+      a({ name: "Varanasi Ghats", category: "Hidden Gem", description: "Ancient riverfront steps where dawn aartis meet the sacred Ganges.", location: "Varanasi", ticket: "Free", hours: "24 hours", bestTime: "Sunrise boat ride", tip: "Witness the evening Ganga Aarti.", query: "varanasi ghats ganges" }),
+    ],
+    culture: {
+      festivals: ["Diwali (Festival of Lights)", "Holi (Colors)", "Durga Puja"],
+      language: "Hindi, English + 20 official languages",
+      greeting: "Namaste 🙏 with palms together",
+      clothing: "Saree, kurta & vibrant regional dress",
+      etiquette: ["Remove shoes in temples & homes", "Eat with the right hand", "Dress modestly at shrines"],
+      currency: "Indian Rupee (₹ / INR)",
+      religion: "Hindu majority; richly multi-faith",
+      holidays: ["Diwali", "Independence Day (Aug 15)", "Holi"],
+      customs: ["Touching elders' feet", "Festive rangoli art", "Chai at every hour"],
+    },
+    accent: "from-amber-300/40 to-sky-500/40",
+  },
+
+  /* ─────────────── THAILAND ─────────────── */
+  {
+    id: "thailand",
+    name: "Thailand",
+    flag: "🇹🇭",
+    tagline: "Land of Smiles.",
+    description:
+      "Gilded temples, turquoise islands, and night markets perfumed with lemongrass and chilli — serenity and chaos in perfect balance.",
+    image: place("thailand temple beach"),
+    rating: 4.8,
+    bestSeason: "Nov–Mar (cool, dry)",
+    budget: "$",
+    budgetLabel: "Great value",
+    cities: ["Bangkok", "Chiang Mai", "Phuket", "Krabi"],
+    region: "Southeast Asia",
+    visa: "Visa-free / Visa-on-arrival (30–60 days)",
+    safety: 78,
+    timezone: "ICT (UTC+7)",
+    foods: [
+      f({ name: "Pad Thai", specialty: "Wok-tossed icon", description: "Stir-fried rice noodles with tamarind, egg, peanuts and prawns — sweet, sour and savoury in every bite.", ingredients: ["Rice noodles", "Tamarind", "Egg", "Peanuts", "Bean sprouts"], priceRange: "$", diet: "Both", spice: 2, calories: "~430 kcal", popularity: 95, restaurants: ["Thip Samai (Bangkok)"], streetFood: ["Riverside night markets", "Soi food carts"] }),
+      f({ name: "Tom Yum Goong", specialty: "Fiery aromatic soup", description: "A hot-and-sour prawn soup loud with lemongrass, galangal, lime and bird's-eye chilli.", ingredients: ["Prawns", "Lemongrass", "Galangal", "Kaffir lime", "Chilli"], priceRange: "$$", diet: "Non-Vegetarian", spice: 4, calories: "~290 kcal", popularity: 90, restaurants: ["Pe Aor (Bangkok)"], streetFood: ["Wet-market soup stalls"] }),
+      f({ name: "Mango Sticky Rice", specialty: "Sweet coconut bliss", description: "Warm glutinous rice steeped in coconut cream beside ripe golden mango.", ingredients: ["Glutinous rice", "Coconut milk", "Ripe mango", "Palm sugar"], priceRange: "$", diet: "Vegetarian", spice: 0, calories: "~340 kcal", popularity: 88, restaurants: ["Mae Varee (Bangkok)"], streetFood: ["Dessert carts", "Weekend markets"] }),
+    ],
+    music: [
+      { genre: "Luk Thung", mood: "Rural ballads", type: "Traditional", artists: ["Pumpuang Duangjan"] },
+      { genre: "Thai Pop (T-Pop)", mood: "Bright & youthful", type: "Modern", artists: ["BNK48", "Phum Viphurit"] },
+      { genre: "Mor Lam", mood: "Hypnotic Isan groove", type: "Regional", artists: ["Rasmee"] },
+    ],
+    attractions: [
+      a({ name: "Grand Palace & Wat Phra Kaew", category: "Historical", description: "A dazzling royal complex housing the revered Emerald Buddha.", location: "Bangkok", ticket: "฿500", hours: "8:30am–3:30pm", bestTime: "Early morning", tip: "Cover shoulders and knees to enter.", query: "grand palace bangkok" }),
+      a({ name: "Phi Phi Islands", category: "Beaches", description: "Limestone cliffs plunging into electric-blue lagoons.", location: "Krabi", ticket: "Boat tours ฿1000+", hours: "Day trips", bestTime: "Nov–Apr", tip: "Go early to beat the crowds at Maya Bay.", query: "phi phi islands thailand" }),
+      a({ name: "Doi Suthep Temple", category: "Historical", description: "A golden mountaintop temple overlooking Chiang Mai.", location: "Chiang Mai", ticket: "฿30", hours: "6am–6pm", bestTime: "Sunset", tip: "Climb the 309-step naga staircase.", query: "doi suthep temple" }),
+    ],
+    culture: {
+      festivals: ["Songkran (Water Festival)", "Loi Krathong (Lights)", "Yi Peng Lantern"],
+      language: "Thai (ภาษาไทย)",
+      greeting: "Sawasdee 🙏 with a wai",
+      clothing: "Light modest dress; cover up at temples",
+      etiquette: ["Never touch someone's head", "Don't point feet at people/Buddha", "Respect the monarchy"],
+      currency: "Thai Baht (฿ / THB)",
+      religion: "Theravada Buddhism",
+      holidays: ["Songkran", "King's Birthday", "Loi Krathong"],
+      customs: ["The wai greeting", "Spirit houses", "Floating krathong offerings"],
+    },
+    accent: "from-violet-300/40 to-sky-500/40",
+  },
+
+  /* ─────────────── SPAIN ─────────────── */
+  {
+    id: "spain",
+    name: "Spain",
+    flag: "🇪🇸",
+    tagline: "Sun, Soul & Siesta.",
+    description:
+      "Flamenco heels on cobbled streets, Gaudí's dreamlike spires, and tapas shared until midnight — passion lived out loud.",
+    image: place("spain barcelona architecture"),
+    rating: 4.7,
+    bestSeason: "Apr–Jun & Sep–Oct",
+    budget: "$$",
+    budgetLabel: "Moderate",
+    cities: ["Barcelona", "Madrid", "Seville", "Granada"],
+    region: "Southern Europe",
+    visa: "Schengen Visa (90 days)",
+    safety: 84,
+    timezone: "CET (UTC+1)",
+    foods: [
+      f({ name: "Paella Valenciana", specialty: "Saffron rice feast", description: "Bomba rice simmered in a wide pan with saffron, rabbit, chicken and beans, crowned by a prized crust (socarrat).", ingredients: ["Bomba rice", "Saffron", "Chicken", "Rabbit", "Green beans"], priceRange: "$$", diet: "Both", spice: 1, calories: "~470 kcal", popularity: 93, restaurants: ["Casa Carmela (Valencia)"], streetFood: ["Sunday family paellas"] }),
+      f({ name: "Jamón Ibérico", specialty: "Acorn-cured artistry", description: "Silky hand-carved ham from acorn-fed black pigs, melting at room temperature.", ingredients: ["Ibérico pork leg", "Sea salt", "Time (36+ months)"], priceRange: "$$$", diet: "Non-Vegetarian", spice: 0, calories: "~250 kcal", popularity: 89, restaurants: ["Mercado de San Miguel (Madrid)"], streetFood: ["Tapas bar counters"] }),
+      f({ name: "Patatas Bravas", specialty: "Smoky-spiced potatoes", description: "Crisp fried potato cubes drenched in smoky brava sauce and garlic aioli.", ingredients: ["Potatoes", "Smoked paprika", "Tomato", "Garlic aioli"], priceRange: "$", diet: "Vegetarian", spice: 2, calories: "~320 kcal", popularity: 85, restaurants: ["Bar Tomás (Barcelona)"], streetFood: ["Every neighbourhood tapas bar"] }),
+    ],
+    music: [
+      { genre: "Flamenco", mood: "Raw Andalusian passion", type: "Traditional", artists: ["Paco de Lucía", "Camarón de la Isla"] },
+      { genre: "Spanish Pop", mood: "Sunlit & danceable", type: "Modern", artists: ["Rosalía", "Alejandro Sanz"] },
+      { genre: "Rumba Catalana", mood: "Street-party rhythm", type: "Regional", artists: ["Gipsy Kings"] },
+    ],
+    attractions: [
+      a({ name: "Sagrada Família", category: "Historical", description: "Gaudí's unfinished basilica where stone melts into forest-like columns and stained-glass light.", location: "Barcelona", ticket: "€26", hours: "9am–6pm", bestTime: "Morning light", tip: "Book timed tickets weeks ahead.", unesco: true, query: "sagrada familia" }),
+      a({ name: "Alhambra", category: "Historical", description: "A Moorish palace-fortress of intricate arabesques above Granada.", location: "Granada", ticket: "€19", hours: "8:30am–8pm", bestTime: "Sunset over Albaicín", tip: "Nasrid Palaces require a timed slot.", unesco: true, query: "alhambra granada" }),
+      a({ name: "Plaza de España", category: "Hidden Gem", description: "A semicircular tiled plaza of bridges and azulejos in Seville.", location: "Seville", ticket: "Free", hours: "24 hours", bestTime: "Golden hour", tip: "Rent a rowboat on the canal.", query: "plaza de espana seville" }),
+    ],
+    culture: {
+      festivals: ["La Tomatina", "Running of the Bulls (San Fermín)", "Feria de Abril"],
+      language: "Spanish (Español)",
+      greeting: "¡Hola! with two cheek kisses",
+      clothing: "Stylish smart-casual; dress up for evenings",
+      etiquette: ["Dinner starts late (9–10pm)", "Greet with two kisses", "Respect the siesta hours"],
+      currency: "Euro (€ / EUR)",
+      religion: "Catholic heritage",
+      holidays: ["Semana Santa", "La Tomatina", "Three Kings (Reyes)"],
+      customs: ["Late-night tapas crawls", "Sobremesa table talk", "Flamenco evenings"],
+    },
+    accent: "from-rose-300/40 to-sky-500/40",
+  },
+
+  /* ─────────────── EGYPT ─────────────── */
+  {
+    id: "egypt",
+    name: "Egypt",
+    flag: "🇪🇬",
+    tagline: "Where Time Began.",
+    description:
+      "Pyramids piercing a desert sky, a sacred river of life, and 5,000 years of pharaohs whispering from temple walls.",
+    image: place("egypt pyramids nile"),
+    rating: 4.6,
+    bestSeason: "Oct–Apr (mild)",
+    budget: "$",
+    budgetLabel: "Affordable",
+    cities: ["Cairo", "Luxor", "Aswan", "Alexandria"],
+    region: "North Africa",
+    visa: "eVisa / Visa-on-arrival (30 days)",
+    safety: 68,
+    timezone: "EET (UTC+2)",
+    foods: [
+      f({ name: "Koshari", specialty: "National comfort bowl", description: "A hearty street tangle of rice, lentils, macaroni and chickpeas under spicy tomato sauce and crisp onions.", ingredients: ["Rice", "Lentils", "Macaroni", "Chickpeas", "Fried onions"], priceRange: "$", diet: "Vegetarian", spice: 2, calories: "~450 kcal", popularity: 91, restaurants: ["Abou Tarek (Cairo)"], streetFood: ["Koshari shops citywide"] }),
+      f({ name: "Ful Medames", specialty: "Ancient breakfast", description: "Slow-stewed fava beans mashed with olive oil, cumin and lemon — eaten since the pharaohs.", ingredients: ["Fava beans", "Olive oil", "Cumin", "Lemon", "Garlic"], priceRange: "$", diet: "Vegetarian", spice: 1, calories: "~300 kcal", popularity: 86, restaurants: ["Felfela (Cairo)"], streetFood: ["Morning ful carts"] }),
+      f({ name: "Molokhia", specialty: "Emerald jute stew", description: "A silky green stew of finely chopped jute leaves with garlic and coriander, ladled over rice or bread.", ingredients: ["Jute leaves", "Garlic", "Coriander", "Chicken stock"], priceRange: "$", diet: "Both", spice: 1, calories: "~210 kcal", popularity: 80, restaurants: ["Home kitchens & local diners"], streetFood: ["Baladi eateries"] }),
+    ],
+    music: [
+      { genre: "Tarab / Classical Arabic", mood: "Soulful & sweeping", type: "Traditional", artists: ["Umm Kulthum", "Mohamed Abdel Wahab"] },
+      { genre: "Mahraganat", mood: "Electro street energy", type: "Modern", artists: ["Sadat", "Oka Wi Ortega"] },
+      { genre: "Shaabi", mood: "Working-class festivity", type: "Regional", artists: ["Ahmed Adaweya"] },
+    ],
+    attractions: [
+      a({ name: "Pyramids of Giza", category: "Historical", description: "The last surviving Ancient Wonder — three colossal tombs guarded by the Sphinx.", location: "Giza", ticket: "EGP 540", hours: "7am–5pm", bestTime: "Early morning", tip: "Ride a camel out for the classic panorama.", unesco: true, query: "pyramids of giza" }),
+      a({ name: "Karnak Temple", category: "Historical", description: "A vast hall of 134 towering carved columns built across 2,000 years.", location: "Luxor", ticket: "EGP 450", hours: "6am–5:30pm", bestTime: "Late afternoon", tip: "Return for the evening sound & light show.", unesco: true, query: "karnak temple luxor" }),
+      a({ name: "Nile Felucca Sail", category: "Nature", description: "Drift past palm-fringed banks on a traditional white-sailed boat at sunset.", location: "Aswan", ticket: "~EGP 300/hr", hours: "Daylight", bestTime: "Sunset", tip: "Negotiate the price before boarding.", query: "felucca nile aswan" }),
+    ],
+    culture: {
+      festivals: ["Ramadan & Eid", "Abu Simbel Sun Festival", "Sham El-Nessim (Spring)"],
+      language: "Arabic (العربية)",
+      greeting: "As-salamu alaykum (السلام عليكم)",
+      clothing: "Modest dress; cover shoulders & knees",
+      etiquette: ["Use the right hand", "Dress modestly at mosques", "Bargain politely in bazaars"],
+      currency: "Egyptian Pound (E£ / EGP)",
+      religion: "Muslim majority; Coptic Christian minority",
+      holidays: ["Eid al-Fitr", "Eid al-Adha", "Sham El-Nessim"],
+      customs: ["Generous hospitality", "Mint tea welcomes", "Haggling in souks"],
+    },
+    accent: "from-amber-300/40 to-cyan-500/40",
   },
 ];
 

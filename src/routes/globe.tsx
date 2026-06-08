@@ -13,11 +13,15 @@ export const Route = createFileRoute("/globe")({
 
 /* ─── Markers ─────────────────────────────────────────────────── */
 const MARKERS = [
-  { id: "japan",  name: "Japan",       flag: "🇯🇵", lat:  35.6762, lng:  139.6503, color: "#38bdf8", ring: "rgba(56,189,248,",  region: "Asia"          },
-  { id: "france", name: "France",      flag: "🇫🇷", lat:  48.8566, lng:    2.3522, color: "#a78bfa", ring: "rgba(167,139,250,", region: "Europe"        },
-  { id: "italy",  name: "Italy",       flag: "🇮🇹", lat:  41.9028, lng:   12.4964, color: "#34d399", ring: "rgba(52,211,153,",  region: "Europe"        },
-  { id: "korea",  name: "South Korea", flag: "🇰🇷", lat:  37.5665, lng:  126.9780, color: "#f472b6", ring: "rgba(244,114,182,", region: "Asia"          },
-  { id: "brazil", name: "Brazil",      flag: "🇧🇷", lat: -15.7801, lng:  -47.9292, color: "#4ade80", ring: "rgba(74,222,128,",  region: "South America" },
+  { id: "japan",    name: "Japan",       flag: "🇯🇵", lat:  35.6762, lng:  139.6503, color: "#38bdf8", ring: "rgba(56,189,248,",  region: "East Asia"      },
+  { id: "france",   name: "France",      flag: "🇫🇷", lat:  48.8566, lng:    2.3522, color: "#7dd3fc", ring: "rgba(125,211,252,", region: "Western Europe" },
+  { id: "italy",    name: "Italy",       flag: "🇮🇹", lat:  41.9028, lng:   12.4964, color: "#34d399", ring: "rgba(52,211,153,",  region: "Southern Europe"},
+  { id: "korea",    name: "South Korea", flag: "🇰🇷", lat:  37.5665, lng:  126.9780, color: "#f472b6", ring: "rgba(244,114,182,", region: "East Asia"      },
+  { id: "brazil",   name: "Brazil",      flag: "🇧🇷", lat: -15.7801, lng:  -47.9292, color: "#4ade80", ring: "rgba(74,222,128,",  region: "South America"  },
+  { id: "india",    name: "India",       flag: "🇮🇳", lat:  28.6139, lng:   77.2090, color: "#fbbf24", ring: "rgba(251,191,36,",  region: "South Asia"     },
+  { id: "thailand", name: "Thailand",    flag: "🇹🇭", lat:  13.7563, lng:  100.5018, color: "#22d3ee", ring: "rgba(34,211,238,",  region: "Southeast Asia" },
+  { id: "spain",    name: "Spain",       flag: "🇪🇸", lat:  40.4168, lng:   -3.7038, color: "#fb7185", ring: "rgba(251,113,133,", region: "Southern Europe"},
+  { id: "egypt",    name: "Egypt",       flag: "🇪🇬", lat:  30.0444, lng:   31.2357, color: "#facc15", ring: "rgba(250,204,21,",  region: "North Africa"   },
 ];
 
 type Marker = (typeof MARKERS)[0];
@@ -363,20 +367,28 @@ function GlobePage() {
     if (globeRef.current) globeRef.current.controls().autoRotate = true;
   }, []);
 
-  /* HTML label */
+  /* HTML label — a big, tappable pill (works for mouse + touch) */
   const buildLabel = useCallback((d: object) => {
     const m = d as Marker;
     const el = document.createElement("div");
-    el.style.cssText = "pointer-events:none;transform:translate(-50%,-140%);display:flex;flex-direction:column;align-items:center;gap:3px;";
+    el.style.cssText = "pointer-events:auto;cursor:pointer;transform:translate(-50%,-150%);display:flex;flex-direction:column;align-items:center;gap:3px;-webkit-tap-highlight-color:transparent;touch-action:manipulation;";
     el.innerHTML = `
-      <div style="background:rgba(6,14,30,0.88);backdrop-filter:blur(14px);border:1px solid ${m.color}55;border-radius:999px;padding:4px 11px;font-size:12px;font-family:inherit;font-weight:700;color:#fff;white-space:nowrap;box-shadow:0 0 16px ${m.color}55;display:flex;align-items:center;gap:5px;">
-        <span style="font-size:15px">${m.flag}</span>
+      <div style="background:rgba(6,14,30,0.9);backdrop-filter:blur(14px);border:1px solid ${m.color}66;border-radius:999px;padding:7px 14px;font-size:13px;font-family:inherit;font-weight:700;color:#fff;white-space:nowrap;box-shadow:0 0 18px ${m.color}55;display:flex;align-items:center;gap:6px;transition:transform .18s ease, box-shadow .18s ease;">
+        <span style="font-size:16px">${m.flag}</span>
         <span>${m.name}</span>
       </div>
       <div style="width:2px;height:14px;background:linear-gradient(to bottom,${m.color},transparent);border-radius:99px;box-shadow:0 0 8px ${m.color};"></div>
     `;
+    const pill = el.firstElementChild as HTMLElement;
+    const grow = () => { pill.style.transform = "scale(1.12)"; pill.style.boxShadow = `0 0 28px ${m.color}aa`; };
+    const reset = () => { pill.style.transform = "scale(1)"; pill.style.boxShadow = `0 0 18px ${m.color}55`; };
+    el.addEventListener("mouseenter", () => { grow(); setHovered(m); });
+    el.addEventListener("mouseleave", () => { reset(); setHovered(null); });
+    const fire = (ev: Event) => { ev.preventDefault(); ev.stopPropagation(); handleSelect(m); };
+    el.addEventListener("click", fire);
+    el.addEventListener("touchstart", fire, { passive: false });
     return el;
-  }, []);
+  }, [handleSelect]);
 
   return (
     <main className="relative flex min-h-screen flex-col overflow-hidden bg-[oklch(0.07_0.03_245)]">
@@ -429,8 +441,9 @@ function GlobePage() {
               pointLat="lat"
               pointLng="lng"
               pointColor="color"
-              pointRadius={(d: Marker) => d.id === selected?.id ? 0.9 : 0.55}
-              pointAltitude={0.025}
+              pointRadius={(d: Marker) => d.id === selected?.id ? 1.1 : 0.75}
+              pointAltitude={0.03}
+              pointsMerge={false}
               /* Labels */
               htmlElementsData={MARKERS}
               htmlLat="lat"
@@ -539,37 +552,38 @@ function GlobePage() {
           </AnimatePresence>
         </div>
 
-        {/* Country dot legend — bottom left */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 1.5, duration: 0.8 }}
-          className="pointer-events-auto fixed bottom-8 left-6 z-30 flex flex-col gap-2 lg:bottom-10 lg:left-10"
-        >
-          {MARKERS.map((m, i) => (
-            <motion.button
-              key={m.id}
-              initial={{ opacity: 0, x: -16 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.6 + i * 0.08 }}
-              onClick={() => handleSelect(m)}
-              className="flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold backdrop-blur-xl transition-all hover:scale-105 hover:brightness-125"
-              style={{
-                background: m.color + "14",
-                borderColor: m.color + "35",
-                color: m.color,
-              }}
+        {/* Country pill bar — bottom, horizontally scrollable; hides when a country is open */}
+        <AnimatePresence>
+          {!selected && (
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 24 }}
+              transition={{ delay: 0.4, duration: 0.7 }}
+              className="pointer-events-auto fixed inset-x-0 bottom-6 z-30 flex justify-center px-4"
             >
-              <motion.span
-                className="h-1.5 w-1.5 rounded-full flex-shrink-0"
-                style={{ backgroundColor: m.color }}
-                animate={{ boxShadow: [`0 0 4px ${m.color}`, `0 0 10px ${m.color}`, `0 0 4px ${m.color}`] }}
-                transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
-              />
-              {m.flag} {m.name}
-            </motion.button>
-          ))}
-        </motion.div>
+              <div
+                className="flex max-w-full gap-2 overflow-x-auto rounded-full border border-white/10 bg-black/40 p-1.5 backdrop-blur-xl"
+                style={{ scrollbarWidth: "none" }}
+              >
+                {MARKERS.map((m, i) => (
+                  <motion.button
+                    key={m.id}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.5 + i * 0.05 }}
+                    onClick={() => handleSelect(m)}
+                    className="flex flex-shrink-0 items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold transition-all hover:scale-105 hover:brightness-125 active:scale-95"
+                    style={{ background: m.color + "16", borderColor: m.color + "3a", color: m.color }}
+                  >
+                    <span className="text-sm leading-none">{m.flag}</span>
+                    <span className="whitespace-nowrap">{m.name}</span>
+                  </motion.button>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </main>
   );

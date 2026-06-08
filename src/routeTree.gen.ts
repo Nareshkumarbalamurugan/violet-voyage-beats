@@ -22,7 +22,7 @@ import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CountryIdRouteImport } from './routes/country.$id'
-import { Route as CountryIdFoodFoodIdRouteImport } from './routes/country.$id.food.$foodId'
+import { Route as CountryIdFoodFoodIdRouteImport } from './routes/country.$id_.food.$foodId'
 
 const ToolsRoute = ToolsRouteImport.update({
   id: '/tools',
@@ -90,9 +90,9 @@ const CountryIdRoute = CountryIdRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const CountryIdFoodFoodIdRoute = CountryIdFoodFoodIdRouteImport.update({
-  id: '/food/$foodId',
-  path: '/food/$foodId',
-  getParentRoute: () => CountryIdRoute,
+  id: '/country/$id_/food/$foodId',
+  path: '/country/$id/food/$foodId',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -108,7 +108,7 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
   '/tools': typeof ToolsRoute
-  '/country/$id': typeof CountryIdRouteWithChildren
+  '/country/$id': typeof CountryIdRoute
   '/country/$id/food/$foodId': typeof CountryIdFoodFoodIdRoute
 }
 export interface FileRoutesByTo {
@@ -124,7 +124,7 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
   '/tools': typeof ToolsRoute
-  '/country/$id': typeof CountryIdRouteWithChildren
+  '/country/$id': typeof CountryIdRoute
   '/country/$id/food/$foodId': typeof CountryIdFoodFoodIdRoute
 }
 export interface FileRoutesById {
@@ -141,8 +141,8 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
   '/tools': typeof ToolsRoute
-  '/country/$id': typeof CountryIdRouteWithChildren
-  '/country/$id/food/$foodId': typeof CountryIdFoodFoodIdRoute
+  '/country/$id': typeof CountryIdRoute
+  '/country/$id_/food/$foodId': typeof CountryIdFoodFoodIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -192,7 +192,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/tools'
     | '/country/$id'
-    | '/country/$id/food/$foodId'
+    | '/country/$id_/food/$foodId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -208,7 +208,8 @@ export interface RootRouteChildren {
   SignupRoute: typeof SignupRoute
   TermsRoute: typeof TermsRoute
   ToolsRoute: typeof ToolsRoute
-  CountryIdRoute: typeof CountryIdRouteWithChildren
+  CountryIdRoute: typeof CountryIdRoute
+  CountryIdFoodFoodIdRoute: typeof CountryIdFoodFoodIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -304,27 +305,15 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CountryIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/country/$id/food/$foodId': {
-      id: '/country/$id/food/$foodId'
-      path: '/food/$foodId'
+    '/country/$id_/food/$foodId': {
+      id: '/country/$id_/food/$foodId'
+      path: '/country/$id/food/$foodId'
       fullPath: '/country/$id/food/$foodId'
       preLoaderRoute: typeof CountryIdFoodFoodIdRouteImport
-      parentRoute: typeof CountryIdRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
-
-interface CountryIdRouteChildren {
-  CountryIdFoodFoodIdRoute: typeof CountryIdFoodFoodIdRoute
-}
-
-const CountryIdRouteChildren: CountryIdRouteChildren = {
-  CountryIdFoodFoodIdRoute: CountryIdFoodFoodIdRoute,
-}
-
-const CountryIdRouteWithChildren = CountryIdRoute._addFileChildren(
-  CountryIdRouteChildren,
-)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -339,7 +328,8 @@ const rootRouteChildren: RootRouteChildren = {
   SignupRoute: SignupRoute,
   TermsRoute: TermsRoute,
   ToolsRoute: ToolsRoute,
-  CountryIdRoute: CountryIdRouteWithChildren,
+  CountryIdRoute: CountryIdRoute,
+  CountryIdFoodFoodIdRoute: CountryIdFoodFoodIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

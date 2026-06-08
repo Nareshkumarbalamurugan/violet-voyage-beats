@@ -194,47 +194,66 @@ function Fact({ icon, label }: { icon: React.ReactNode; label?: string }) {
 function FoodTab({ country }: { country: (typeof countries)[number] }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+      initial="hidden"
+      animate="show"
+      variants={{ show: { transition: { staggerChildren: 0.08 } } }}
+      className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
     >
       {country.foods.map((f: Food) => (
-        <Link
+        <motion.div
           key={f.id}
-          to="/country/$id/food/$foodId"
-          params={{ id: country.id, foodId: f.id }}
-          className="card-lift group glass relative block overflow-hidden rounded-3xl"
+          variants={{
+            hidden: { opacity: 0, y: 24 },
+            show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
+          }}
         >
-          <div className="relative aspect-[4/3] overflow-hidden">
-            <img
-              src={f.image}
-              alt={f.name}
-              loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 to-transparent" />
-            <span
-              className={`absolute right-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-medium ${
-                f.diet === "Vegetarian"
-                  ? "bg-emerald-500/80 text-white"
-                  : f.diet === "Non-Vegetarian"
-                  ? "bg-rose-500/80 text-white"
-                  : "bg-amber-500/80 text-black"
-              }`}
-            >
-              {f.diet === "Vegetarian" ? "Veg" : f.diet === "Non-Vegetarian" ? "Non-Veg" : "Both"}
-            </span>
-          </div>
-          <div className="p-4">
-            <p className="text-base font-semibold">{f.name}</p>
-            <p className="text-[10px] uppercase tracking-[0.2em] text-gold">{f.specialty}</p>
-            <div className="mt-2 flex items-center justify-between text-xs text-muted-foreground">
-              <span>{f.priceRange}</span>
-              <span>{"🌶️".repeat(Math.max(1, f.spice)) || "—"}</span>
+          <Link
+            to="/country/$id/food/$foodId"
+            params={{ id: country.id, foodId: f.id }}
+            className="card-lift group glass relative flex h-full flex-col overflow-hidden rounded-3xl p-6"
+          >
+            {/* Accent glow corner */}
+            <div className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-primary/20 blur-2xl transition-opacity duration-500 group-hover:opacity-100 opacity-50" />
+
+            {/* Top row: diet chip + spice */}
+            <div className="mb-4 flex items-center justify-between">
+              <span
+                className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider ${
+                  f.diet === "Vegetarian"
+                    ? "bg-emerald-500/20 text-emerald-300 ring-1 ring-emerald-400/30"
+                    : f.diet === "Non-Vegetarian"
+                    ? "bg-rose-500/20 text-rose-300 ring-1 ring-rose-400/30"
+                    : "bg-amber-500/20 text-amber-300 ring-1 ring-amber-400/30"
+                }`}
+              >
+                {f.diet === "Vegetarian" ? "Veg" : f.diet === "Non-Vegetarian" ? "Non-Veg" : "Veg & Non-Veg"}
+              </span>
+              <span className="text-sm" title={`Spice ${f.spice}/5`}>
+                {f.spice > 0 ? "🌶️".repeat(f.spice) : "🥛"}
+              </span>
             </div>
-          </div>
-        </Link>
+
+            {/* Name + specialty */}
+            <h3 className="text-2xl font-semibold leading-tight transition-colors group-hover:text-primary">
+              {f.name}
+            </h3>
+            <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-gold">{f.specialty}</p>
+
+            {/* Description */}
+            <p className="mt-3 line-clamp-3 text-sm text-muted-foreground">{f.description}</p>
+
+            {/* Meta footer */}
+            <div className="mt-5 flex items-center justify-between border-t border-white/10 pt-4 text-xs">
+              <span className="font-medium text-foreground/90">{f.priceRange}</span>
+              <span className="text-muted-foreground">{f.calories}</span>
+            </div>
+
+            <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-primary opacity-0 transition-all duration-300 group-hover:opacity-100">
+              View recipe &amp; spots
+              <span className="transition-transform group-hover:translate-x-1">→</span>
+            </span>
+          </Link>
+        </motion.div>
       ))}
     </motion.div>
   );
