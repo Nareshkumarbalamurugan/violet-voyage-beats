@@ -60,7 +60,7 @@ function FoodPage() {
           transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/30 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80" />
         <div className={`absolute inset-0 bg-gradient-to-tr ${country.accent} mix-blend-soft-light`} />
 
         <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-20">
@@ -188,7 +188,7 @@ function FoodPage() {
                 alt={country.name}
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
               <div className="relative z-10 flex h-full flex-col justify-end p-4">
                 <p className="text-2xl font-semibold">{country.name}</p>
                 <p className="text-sm text-gold">More flavors →</p>

@@ -36,7 +36,8 @@ export function CountryStory({ country, index }: { country: Country; index: numb
           height={1080}
           className="h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/40 to-background" />
+        {/* Always-dark overlay so text stays legible in both light and dark mode */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80" />
         <div className={`absolute inset-0 bg-gradient-to-tr ${country.accent} mix-blend-soft-light`} />
       </motion.div>
 
@@ -69,7 +70,7 @@ export function CountryStory({ country, index }: { country: Country; index: numb
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-20%" }}
             transition={{ duration: 0.9, delay: 0.15 }}
-            className="mt-6 text-2xl md:text-3xl text-gradient-violet font-display"
+            className="mt-6 text-2xl md:text-3xl text-white/95 font-display"
           >
             {country.tagline}
           </motion.p>
@@ -78,7 +79,7 @@ export function CountryStory({ country, index }: { country: Country; index: numb
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-20%" }}
             transition={{ duration: 0.9, delay: 0.25 }}
-            className="mt-6 max-w-md text-lg text-muted-foreground"
+            className="mt-6 max-w-md text-lg text-white/75"
           >
             {country.description}
           </motion.p>

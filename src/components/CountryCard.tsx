@@ -24,16 +24,17 @@ export function CountryCard({ country, index = 0 }: { country: Country; index?: 
             loading="lazy"
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-          <div className={`absolute inset-0 bg-gradient-to-tr ${country.accent} mix-blend-soft-light opacity-70`} />
+          {/* Dark overlay — always dark regardless of theme so white text stays legible */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+          <div className={`absolute inset-0 bg-gradient-to-tr ${country.accent} mix-blend-soft-light opacity-50`} />
 
           {/* Top row */}
           <div className="absolute inset-x-0 top-0 flex items-center justify-between p-4">
-            <span className="glass flex items-center gap-1.5 rounded-full px-3 py-1 text-xs">
+            <span className="flex items-center gap-1.5 rounded-full bg-black/40 backdrop-blur-sm px-3 py-1 text-xs text-white border border-white/20">
               <span className="text-base leading-none">{country.flag}</span>
               {country.region}
             </span>
-            <span className="glass rounded-full px-3 py-1 text-xs font-semibold">
+            <span className="rounded-full bg-black/40 backdrop-blur-sm px-3 py-1 text-xs font-semibold text-white border border-white/20">
               {country.budget}
             </span>
           </div>
@@ -42,14 +43,14 @@ export function CountryCard({ country, index = 0 }: { country: Country; index?: 
           <div className="absolute inset-x-0 bottom-0 p-5">
             <div className="mb-2 flex items-center justify-between">
               <Stars value={country.rating} />
-              <span className="text-[10px] uppercase tracking-[0.2em] text-gold">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-sky-300">
                 {country.budgetLabel}
               </span>
             </div>
-            <h3 className="text-3xl font-semibold leading-tight">{country.name}</h3>
-            <p className="mt-1 text-sm text-white/80">{country.tagline}</p>
+            <h3 className="text-3xl font-semibold leading-tight text-white">{country.name}</h3>
+            <p className="mt-1 text-sm text-white/90 drop-shadow-sm">{country.tagline}</p>
 
-            <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-white/70">
+            <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-white/80">
               <span className="inline-flex items-center gap-1">
                 <Calendar className="h-3 w-3" /> {country.bestSeason}
               </span>
@@ -58,7 +59,7 @@ export function CountryCard({ country, index = 0 }: { country: Country; index?: 
               </span>
             </div>
 
-            <span className="mt-4 inline-flex items-center gap-2 text-sm text-gold opacity-0 transition-all duration-500 group-hover:opacity-100">
+            <span className="mt-4 inline-flex items-center gap-2 text-sm text-sky-300 opacity-0 transition-all duration-500 group-hover:opacity-100">
               Step inside <span className="transition-transform group-hover:translate-x-1">→</span>
             </span>
           </div>

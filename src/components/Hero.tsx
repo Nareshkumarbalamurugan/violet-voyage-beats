@@ -34,7 +34,7 @@ export function Hero() {
         className="absolute inset-0 h-full w-full object-cover opacity-70"
       />
       <div className="absolute inset-0 bg-aurora" />
-      <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/10 to-background" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/10 to-black/80" />
 
       {/* Floating orbs — sky blue + deep blue */}
       <motion.div

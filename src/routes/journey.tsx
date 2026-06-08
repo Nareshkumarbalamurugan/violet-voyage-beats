@@ -185,7 +185,7 @@ function JourneyPage() {
                   {e.image && (
                     <div className="relative aspect-[16/9] overflow-hidden">
                       <img src={e.image} alt={e.location} className="h-full w-full object-cover" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent" />
                     </div>
                   )}
                   <div className="p-5">

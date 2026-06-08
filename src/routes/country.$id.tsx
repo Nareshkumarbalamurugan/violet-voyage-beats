@@ -74,7 +74,7 @@ function CountryPage() {
           transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/30 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80" />
         <div className={`absolute inset-0 bg-gradient-to-tr ${country.accent} mix-blend-soft-light`} />
 
         <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-20">
@@ -213,7 +213,7 @@ function FoodTab({ country }: { country: (typeof countries)[number] }) {
               loading="lazy"
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 to-transparent" />
             <span
               className={`absolute right-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-medium ${
                 f.diet === "Vegetarian"
@@ -257,7 +257,7 @@ function AttractionsTab({ country }: { country: (typeof countries)[number] }) {
               loading="lazy"
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-4">
               <div>
                 <span className="rounded-full bg-primary/40 px-2.5 py-1 text-[10px] uppercase tracking-wider">
