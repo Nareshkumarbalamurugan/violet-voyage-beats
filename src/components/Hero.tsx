@@ -33,48 +33,65 @@ function CyclingWord() {
 }
 
 /* ── Floating particle ────────────────────────────────────────── */
-function Particle({ delay, color }: { delay: number; color: string }) {
-  const x = Math.random() * 100;
-  const dur = 12 + Math.random() * 10;
-  const size = 1.5 + Math.random() * 2.5;
+type ParticleData = {
+  delay: number; color: string; left: number; dur: number;
+  size: number; rise: number; drift: number; repeatDelay: number;
+};
+
+function Particle({ p }: { p: ParticleData }) {
   return (
     <motion.div
       className="pointer-events-none absolute rounded-full"
       style={{
-        left: `${x}%`,
+        left: `${p.left}%`,
         bottom: "-5%",
-        width: size,
-        height: size,
-        background: color,
-        boxShadow: `0 0 ${size * 3}px ${color}`,
+        width: p.size,
+        height: p.size,
+        background: p.color,
+        boxShadow: `0 0 ${p.size * 3}px ${p.color}`,
       }}
       animate={{
-        y: [0, -(500 + Math.random() * 400)],
-        x: [0, (Math.random() - 0.5) * 120],
+        y: [0, -p.rise],
+        x: [0, p.drift],
         opacity: [0, 0.8, 0.8, 0],
         scale: [0.5, 1.2, 0.8, 0],
       }}
       transition={{
-        duration: dur,
-        delay,
+        duration: p.dur,
+        delay: p.delay,
         repeat: Infinity,
         ease: "easeOut",
-        repeatDelay: Math.random() * 5,
+        repeatDelay: p.repeatDelay,
       }}
     />
   );
 }
 
-const PARTICLES = Array.from({ length: 22 }, (_, i) => ({
+/* Deterministic pseudo-random so values are stable per index */
+function seeded(i: number, salt: number) {
+  const v = Math.sin(i * 12.9898 + salt * 78.233) * 43758.5453;
+  return v - Math.floor(v);
+}
+
+const PARTICLES: ParticleData[] = Array.from({ length: 22 }, (_, i) => ({
   delay: i * 0.7,
   color: i % 3 === 0 ? "#38bdf8" : i % 3 === 1 ? "#a78bfa" : "#34d399",
+  left: seeded(i, 1) * 100,
+  dur: 12 + seeded(i, 2) * 10,
+  size: 1.5 + seeded(i, 3) * 2.5,
+  rise: 500 + seeded(i, 4) * 400,
+  drift: (seeded(i, 5) - 0.5) * 120,
+  repeatDelay: seeded(i, 6) * 5,
 }));
 
 /* ── Hero ─────────────────────────────────────────────────────── */
 export function Hero() {
   const navigate  = useNavigate();
   const [q, setQ] = useState("");
+  const [mounted, setMounted] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => setMounted(true), []);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
   const imgY    = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
   const fadeOut = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
@@ -115,12 +132,14 @@ export function Hero() {
       <div className="absolute inset-0 bg-aurora" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/5 to-black/85" />
 
-      {/* Particles */}
-      <div className="absolute inset-0 overflow-hidden">
-        {PARTICLES.map((p, i) => (
-          <Particle key={i} delay={p.delay} color={p.color} />
-        ))}
-      </div>
+      {/* Particles — client only to avoid SSR hydration mismatch */}
+      {mounted && (
+        <div className="absolute inset-0 overflow-hidden">
+          {PARTICLES.map((p, i) => (
+            <Particle key={i} p={p} />
+          ))}
+        </div>
+      )}
 
       {/* Animated orbs */}
       {[

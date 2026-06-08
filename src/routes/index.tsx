@@ -119,13 +119,10 @@ function GlobeTeaser() {
             ].map((pin, i) => (
               <motion.div
                 key={pin.label}
-                initial={{ opacity: 0, scale: 0, y: 20 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 0 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 + i * 0.13, type: "spring", stiffness: 280, damping: 20 }}
-                animate={{ y: [0, pin.amp, 0] }}
-                // @ts-ignore framer-motion animate overrides
-                transition2={{ duration: pin.dur, repeat: Infinity, ease: "easeInOut", delay: i * 0.4 }}
                 style={{ position: "absolute", left: pin.x, top: pin.y }}
               >
                 <motion.div
