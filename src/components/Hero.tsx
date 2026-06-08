@@ -1,8 +1,26 @@
 import { motion } from "framer-motion";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
+import { Search } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
+import { countries } from "@/data/countries";
 
 export function Hero() {
+  const navigate = useNavigate();
+  const [q, setQ] = useState("");
+
+  const onSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const term = q.trim().toLowerCase();
+    const match = countries.find(
+      (c) =>
+        c.name.toLowerCase().includes(term) ||
+        c.cities.some((ct) => ct.toLowerCase().includes(term))
+    );
+    if (match) navigate({ to: "/country/$id", params: { id: match.id } });
+    else navigate({ to: "/explore" });
+  };
+
   return (
     <section
       id="top"
@@ -18,18 +36,24 @@ export function Hero() {
       <div className="absolute inset-0 bg-aurora" />
       <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/10 to-background" />
 
-      {/* Floating orbs */}
+      {/* Floating luxury orbs — champagne gold + royal navy */}
       <motion.div
         aria-hidden
-        className="absolute -left-32 top-1/3 h-96 w-96 rounded-full bg-primary/40 blur-3xl"
-        animate={{ y: [0, 30, 0], scale: [1, 1.05, 1] }}
+        className="absolute -left-40 top-1/3 h-[28rem] w-[28rem] rounded-full bg-gold/20 blur-[100px]"
+        animate={{ y: [0, 30, 0], scale: [1, 1.06, 1] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
         aria-hidden
-        className="absolute -right-32 bottom-1/4 h-[28rem] w-[28rem] rounded-full bg-accent/30 blur-3xl"
+        className="absolute -right-40 bottom-1/4 h-[32rem] w-[32rem] rounded-full bg-royal/30 blur-[120px]"
         animate={{ y: [0, -40, 0], scale: [1, 1.08, 1] }}
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        aria-hidden
+        className="absolute left-1/2 top-0 h-64 w-[60vw] -translate-x-1/2 rounded-full bg-primary/10 blur-[80px]"
+        animate={{ opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
 
       <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
@@ -37,9 +61,9 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
-          className="mb-6 inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs uppercase tracking-[0.2em] text-lavender"
+          className="mb-6 inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs uppercase tracking-[0.25em] text-gold"
         >
-          <span className="h-1.5 w-1.5 rounded-full bg-lavender" />
+          <span className="h-1.5 w-1.5 animate-gold-pulse rounded-full bg-gold" />
           A new way to experience the world
         </motion.p>
 
@@ -62,11 +86,33 @@ export function Hero() {
           cultures, and sounds.
         </motion.p>
 
+        <motion.form
+          onSubmit={onSearch}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.75, duration: 0.8 }}
+          className="glass mx-auto mt-10 flex max-w-md items-center gap-2 rounded-full p-1.5 shadow-glow"
+        >
+          <Search className="ml-3 h-4 w-4 text-muted-foreground" />
+          <input
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            placeholder="Search a country or city…"
+            className="w-full bg-transparent px-1 text-sm placeholder:text-muted-foreground focus:outline-none"
+          />
+          <button
+            type="submit"
+            className="rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-transform hover:scale-105"
+          >
+            Go
+          </button>
+        </motion.form>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.85, duration: 0.8 }}
-          className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <Link
             to="/explore"

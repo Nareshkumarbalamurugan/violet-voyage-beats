@@ -1,9 +1,12 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import { useMemo, useState } from "react";
+import { Search } from "lucide-react";
 import { countries } from "@/data/countries";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { BackButton } from "@/components/BackButton";
+import { CountryCard } from "@/components/CountryCard";
 
 export const Route = createFileRoute("/explore")({
   head: () => ({
@@ -19,7 +22,28 @@ export const Route = createFileRoute("/explore")({
   component: ExplorePage,
 });
 
+const regions = ["All", ...Array.from(new Set(countries.map((c) => c.region)))];
+const budgets = ["All", "$", "$$", "$$$"];
+
 function ExplorePage() {
+  const [query, setQuery] = useState("");
+  const [region, setRegion] = useState("All");
+  const [budget, setBudget] = useState("All");
+
+  const results = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return countries.filter((c) => {
+      const matchesQuery =
+        !q ||
+        c.name.toLowerCase().includes(q) ||
+        c.cities.some((city) => city.toLowerCase().includes(q)) ||
+        c.tagline.toLowerCase().includes(q);
+      const matchesRegion = region === "All" || c.region === region;
+      const matchesBudget = budget === "All" || c.budget === budget;
+      return matchesQuery && matchesRegion && matchesBudget;
+    });
+  }, [query, region, budget]);
+
   return (
     <main className="relative min-h-screen bg-background text-foreground">
       <Navbar />
@@ -28,12 +52,12 @@ function ExplorePage() {
         <BackButton label="Home" />
       </div>
 
-      <section className="relative mx-auto max-w-7xl px-6 pt-40 pb-16">
+      <section className="relative mx-auto max-w-7xl px-6 pt-40 pb-10">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-xs uppercase tracking-[0.3em] text-lavender"
+          className="text-xs uppercase tracking-[0.3em] text-gold"
         >
           Explore
         </motion.p>
@@ -51,48 +75,73 @@ function ExplorePage() {
           transition={{ duration: 0.9, delay: 0.15 }}
           className="mt-6 max-w-xl text-lg text-muted-foreground"
         >
-          Five destinations, five worlds. Tap any country to step inside its
-          flavors, culture, and sound.
+          Five destinations, five worlds. Search, filter, and tap any country to
+          step inside its flavors, culture, and sound.
         </motion.p>
+
+        {/* Search + filters */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.25 }}
+          className="mt-10 flex flex-col gap-4 md:flex-row md:items-center"
+        >
+          <div className="glass flex flex-1 items-center gap-3 rounded-full px-5 py-3">
+            <Search className="h-4 w-4 text-muted-foreground" />
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search countries or cities…"
+              className="w-full bg-transparent text-sm placeholder:text-muted-foreground focus:outline-none"
+            />
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {regions.map((r) => (
+              <button
+                key={r}
+                onClick={() => setRegion(r)}
+                className={`rounded-full border px-4 py-2 text-xs transition-colors ${
+                  region === r
+                    ? "border-primary/50 bg-primary/30 text-foreground"
+                    : "border-white/10 text-muted-foreground hover:bg-white/5"
+                }`}
+              >
+                {r}
+              </button>
+            ))}
+          </div>
+        </motion.div>
+
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Budget</span>
+          {budgets.map((b) => (
+            <button
+              key={b}
+              onClick={() => setBudget(b)}
+              className={`rounded-full border px-3 py-1.5 text-xs transition-colors ${
+                budget === b
+                  ? "border-gold/50 bg-gold/20 text-foreground"
+                  : "border-white/10 text-muted-foreground hover:bg-white/5"
+              }`}
+            >
+              {b === "All" ? "All" : b}
+            </button>
+          ))}
+        </div>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-6 px-6 pb-24 md:grid-cols-2 lg:grid-cols-3">
-        {countries.map((c, i) => (
-          <motion.div
-            key={c.id}
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <Link
-              to="/country/$id"
-              params={{ id: c.id }}
-              className="group relative block aspect-[3/4] overflow-hidden rounded-3xl shadow-soft"
-            >
-              <img
-                src={c.image}
-                alt={c.name}
-                loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-              <div className={`absolute inset-0 bg-gradient-to-tr ${c.accent} mix-blend-soft-light opacity-80`} />
-
-              <div className="relative z-10 flex h-full flex-col justify-end p-6">
-                <p className="text-[10px] uppercase tracking-[0.3em] text-lavender">
-                  Chapter {String(i + 1).padStart(2, "0")}
-                </p>
-                <h2 className="mt-2 text-4xl font-semibold leading-tight">
-                  {c.name}
-                </h2>
-                <p className="mt-2 text-sm text-white/80">{c.tagline}</p>
-                <span className="mt-5 inline-flex items-center gap-2 text-sm text-lavender opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                  Step inside <span className="transition-transform group-hover:translate-x-1">→</span>
-                </span>
-              </div>
-            </Link>
-          </motion.div>
-        ))}
+      <section className="mx-auto max-w-7xl px-6 pb-24">
+        {results.length === 0 ? (
+          <p className="py-20 text-center text-muted-foreground">
+            No destinations match your search yet. Try a different filter.
+          </p>
+        ) : (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {results.map((c, i) => (
+              <CountryCard key={c.id} country={c} index={i} />
+            ))}
+          </div>
+        )}
       </section>
 
       <Footer />

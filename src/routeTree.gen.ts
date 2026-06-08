@@ -9,14 +9,68 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ToolsRouteImport } from './routes/tools'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as SignupRouteImport } from './routes/signup'
+import { Route as SigninRouteImport } from './routes/signin'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as JourneyRouteImport } from './routes/journey'
 import { Route as ExploreRouteImport } from './routes/explore'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as BlogRouteImport } from './routes/blog'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CountryIdRouteImport } from './routes/country.$id'
 import { Route as CountryIdFoodFoodIdRouteImport } from './routes/country.$id.food.$foodId'
 
+const ToolsRoute = ToolsRouteImport.update({
+  id: '/tools',
+  path: '/tools',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SigninRoute = SigninRouteImport.update({
+  id: '/signin',
+  path: '/signin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JourneyRoute = JourneyRouteImport.update({
+  id: '/journey',
+  path: '/journey',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ExploreRoute = ExploreRouteImport.update({
   id: '/explore',
   path: '/explore',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -37,49 +91,183 @@ const CountryIdFoodFoodIdRoute = CountryIdFoodFoodIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/blog': typeof BlogRoute
+  '/contact': typeof ContactRoute
   '/explore': typeof ExploreRoute
+  '/journey': typeof JourneyRoute
+  '/privacy': typeof PrivacyRoute
+  '/signin': typeof SigninRoute
+  '/signup': typeof SignupRoute
+  '/terms': typeof TermsRoute
+  '/tools': typeof ToolsRoute
   '/country/$id': typeof CountryIdRouteWithChildren
   '/country/$id/food/$foodId': typeof CountryIdFoodFoodIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/blog': typeof BlogRoute
+  '/contact': typeof ContactRoute
   '/explore': typeof ExploreRoute
+  '/journey': typeof JourneyRoute
+  '/privacy': typeof PrivacyRoute
+  '/signin': typeof SigninRoute
+  '/signup': typeof SignupRoute
+  '/terms': typeof TermsRoute
+  '/tools': typeof ToolsRoute
   '/country/$id': typeof CountryIdRouteWithChildren
   '/country/$id/food/$foodId': typeof CountryIdFoodFoodIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/blog': typeof BlogRoute
+  '/contact': typeof ContactRoute
   '/explore': typeof ExploreRoute
+  '/journey': typeof JourneyRoute
+  '/privacy': typeof PrivacyRoute
+  '/signin': typeof SigninRoute
+  '/signup': typeof SignupRoute
+  '/terms': typeof TermsRoute
+  '/tools': typeof ToolsRoute
   '/country/$id': typeof CountryIdRouteWithChildren
   '/country/$id/food/$foodId': typeof CountryIdFoodFoodIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/explore' | '/country/$id' | '/country/$id/food/$foodId'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/blog'
+    | '/contact'
+    | '/explore'
+    | '/journey'
+    | '/privacy'
+    | '/signin'
+    | '/signup'
+    | '/terms'
+    | '/tools'
+    | '/country/$id'
+    | '/country/$id/food/$foodId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/explore' | '/country/$id' | '/country/$id/food/$foodId'
+  to:
+    | '/'
+    | '/about'
+    | '/blog'
+    | '/contact'
+    | '/explore'
+    | '/journey'
+    | '/privacy'
+    | '/signin'
+    | '/signup'
+    | '/terms'
+    | '/tools'
+    | '/country/$id'
+    | '/country/$id/food/$foodId'
   id:
     | '__root__'
     | '/'
+    | '/about'
+    | '/blog'
+    | '/contact'
     | '/explore'
+    | '/journey'
+    | '/privacy'
+    | '/signin'
+    | '/signup'
+    | '/terms'
+    | '/tools'
     | '/country/$id'
     | '/country/$id/food/$foodId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  BlogRoute: typeof BlogRoute
+  ContactRoute: typeof ContactRoute
   ExploreRoute: typeof ExploreRoute
+  JourneyRoute: typeof JourneyRoute
+  PrivacyRoute: typeof PrivacyRoute
+  SigninRoute: typeof SigninRoute
+  SignupRoute: typeof SignupRoute
+  TermsRoute: typeof TermsRoute
+  ToolsRoute: typeof ToolsRoute
   CountryIdRoute: typeof CountryIdRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/tools': {
+      id: '/tools'
+      path: '/tools'
+      fullPath: '/tools'
+      preLoaderRoute: typeof ToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signin': {
+      id: '/signin'
+      path: '/signin'
+      fullPath: '/signin'
+      preLoaderRoute: typeof SigninRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/journey': {
+      id: '/journey'
+      path: '/journey'
+      fullPath: '/journey'
+      preLoaderRoute: typeof JourneyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/explore': {
       id: '/explore'
       path: '/explore'
       fullPath: '/explore'
       preLoaderRoute: typeof ExploreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -120,9 +308,28 @@ const CountryIdRouteWithChildren = CountryIdRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  BlogRoute: BlogRoute,
+  ContactRoute: ContactRoute,
   ExploreRoute: ExploreRoute,
+  JourneyRoute: JourneyRoute,
+  PrivacyRoute: PrivacyRoute,
+  SigninRoute: SigninRoute,
+  SignupRoute: SignupRoute,
+  TermsRoute: TermsRoute,
+  ToolsRoute: ToolsRoute,
   CountryIdRoute: CountryIdRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

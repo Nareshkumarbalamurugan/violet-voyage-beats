@@ -51,7 +51,7 @@ export function CountryStory({ country, index }: { country: Country; index: numb
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-20%" }}
             transition={{ duration: 0.8 }}
-            className="mb-4 text-xs uppercase tracking-[0.3em] text-lavender"
+            className="mb-4 text-xs uppercase tracking-[0.3em] text-gold"
           >
             Chapter {String(index + 1).padStart(2, "0")}
           </motion.span>
@@ -113,7 +113,7 @@ export function CountryStory({ country, index }: { country: Country; index: numb
               <h3 className="text-sm uppercase tracking-[0.2em] text-muted-foreground">
                 Signature Flavors
               </h3>
-              <span className="text-xs text-lavender">Food</span>
+              <span className="text-xs text-gold">Food</span>
             </div>
             <div className="flex flex-wrap gap-2">
               {country.foods.map((f) => (
