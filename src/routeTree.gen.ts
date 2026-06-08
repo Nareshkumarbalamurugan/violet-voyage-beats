@@ -15,6 +15,7 @@ import { Route as SignupRouteImport } from './routes/signup'
 import { Route as SigninRouteImport } from './routes/signin'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as JourneyRouteImport } from './routes/journey'
+import { Route as GlobeRouteImport } from './routes/globe'
 import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BlogRouteImport } from './routes/blog'
@@ -51,6 +52,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const JourneyRoute = JourneyRouteImport.update({
   id: '/journey',
   path: '/journey',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GlobeRoute = GlobeRouteImport.update({
+  id: '/globe',
+  path: '/globe',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExploreRoute = ExploreRouteImport.update({
@@ -95,6 +101,7 @@ export interface FileRoutesByFullPath {
   '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
   '/explore': typeof ExploreRoute
+  '/globe': typeof GlobeRoute
   '/journey': typeof JourneyRoute
   '/privacy': typeof PrivacyRoute
   '/signin': typeof SigninRoute
@@ -110,6 +117,7 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
   '/explore': typeof ExploreRoute
+  '/globe': typeof GlobeRoute
   '/journey': typeof JourneyRoute
   '/privacy': typeof PrivacyRoute
   '/signin': typeof SigninRoute
@@ -126,6 +134,7 @@ export interface FileRoutesById {
   '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
   '/explore': typeof ExploreRoute
+  '/globe': typeof GlobeRoute
   '/journey': typeof JourneyRoute
   '/privacy': typeof PrivacyRoute
   '/signin': typeof SigninRoute
@@ -143,6 +152,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/contact'
     | '/explore'
+    | '/globe'
     | '/journey'
     | '/privacy'
     | '/signin'
@@ -158,6 +168,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/contact'
     | '/explore'
+    | '/globe'
     | '/journey'
     | '/privacy'
     | '/signin'
@@ -173,6 +184,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/contact'
     | '/explore'
+    | '/globe'
     | '/journey'
     | '/privacy'
     | '/signin'
@@ -189,6 +201,7 @@ export interface RootRouteChildren {
   BlogRoute: typeof BlogRoute
   ContactRoute: typeof ContactRoute
   ExploreRoute: typeof ExploreRoute
+  GlobeRoute: typeof GlobeRoute
   JourneyRoute: typeof JourneyRoute
   PrivacyRoute: typeof PrivacyRoute
   SigninRoute: typeof SigninRoute
@@ -240,6 +253,13 @@ declare module '@tanstack/react-router' {
       path: '/journey'
       fullPath: '/journey'
       preLoaderRoute: typeof JourneyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/globe': {
+      id: '/globe'
+      path: '/globe'
+      fullPath: '/globe'
+      preLoaderRoute: typeof GlobeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/explore': {
@@ -312,6 +332,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogRoute: BlogRoute,
   ContactRoute: ContactRoute,
   ExploreRoute: ExploreRoute,
+  GlobeRoute: GlobeRoute,
   JourneyRoute: JourneyRoute,
   PrivacyRoute: PrivacyRoute,
   SigninRoute: SigninRoute,
