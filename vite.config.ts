@@ -12,4 +12,9 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // Force-enable the nitro deploy plugin with the Netlify preset so Netlify
+  // receives a proper SSR function + static assets instead of only bare JS chunks.
+  nitro: {
+    preset: "netlify",
+  },
 });
