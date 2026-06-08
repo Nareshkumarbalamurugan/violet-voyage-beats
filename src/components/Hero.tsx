@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { Search, ChevronDown } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 import { countries } from "@/data/countries";
+import { FloatingIcons } from "./FloatingIcons";
 
 /* ── Cycling headline words ───────────────────────────────────── */
 const WORDS = ["Wonders.", "Flavors.", "Cultures.", "Stories.", "Adventures."];
@@ -132,6 +133,9 @@ export function Hero() {
       <div className="absolute inset-0 bg-aurora" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/5 to-black/85" />
 
+      {/* Bouncy travel icons */}
+      <FloatingIcons />
+
       {/* Particles — client only to avoid SSR hydration mismatch */}
       {mounted && (
         <div className="absolute inset-0 overflow-hidden">
@@ -146,7 +150,7 @@ export function Hero() {
         { className: "absolute -left-52 top-1/3 h-[32rem] w-[32rem]", color: "bg-primary/25", dur: 10, amp: 35 },
         { className: "absolute -right-44 bottom-1/4 h-[38rem] w-[38rem]", color: "bg-royal/35", dur: 13, amp: -45 },
         { className: "absolute left-1/3 top-0 h-72 w-[65vw]", color: "bg-accent/12", dur: 8, amp: 0 },
-        { className: "absolute right-1/3 bottom-0 h-64 w-[50vw]", color: "bg-violet-600/10", dur: 11, amp: 0 },
+        { className: "absolute right-1/3 bottom-0 h-64 w-[50vw]", color: "bg-sky-500/10", dur: 11, amp: 0 },
       ].map((orb, i) => (
         <motion.div
           key={i}
