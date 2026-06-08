@@ -55,20 +55,24 @@ function GlobeTeaser() {
               country to instantly dive into its sights, foods, and culture.
             </p>
 
-            {/* Feature pills */}
+            {/* Feature pills — staggered */}
             <div className="mt-8 flex flex-wrap gap-3">
               {[
                 "🌍 Real-time globe rotation",
                 "📍 Clickable country markers",
                 "🌙 Night Earth view",
                 "✈️ Instant country detail",
-              ].map((f) => (
-                <span
+              ].map((f, i) => (
+                <motion.span
                   key={f}
+                  initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + i * 0.09, type: "spring", stiffness: 350, damping: 22 }}
                   className="glass rounded-full px-4 py-2 text-sm text-foreground"
                 >
                   {f}
-                </span>
+                </motion.span>
               ))}
             </div>
 
@@ -107,27 +111,31 @@ function GlobeTeaser() {
 
             {/* Floating country pins */}
             {[
-              { flag: "🇯🇵", label: "Japan", x: "80%", y: "12%" },
-              { flag: "🇫🇷", label: "France", x: "-8%", y: "22%" },
-              { flag: "🇮🇹", label: "Italy", x: "5%", y: "72%" },
-              { flag: "🇰🇷", label: "Korea", x: "82%", y: "68%" },
-              { flag: "🇧🇷", label: "Brazil", x: "40%", y: "90%" },
+              { flag: "🇯🇵", label: "Japan",  x: "78%", y: "8%",  amp: -7, dur: 3.1 },
+              { flag: "🇫🇷", label: "France", x: "-6%", y: "20%", amp: -5, dur: 3.7 },
+              { flag: "🇮🇹", label: "Italy",  x: "4%",  y: "74%", amp: -8, dur: 2.9 },
+              { flag: "🇰🇷", label: "Korea",  x: "80%", y: "70%", amp: -6, dur: 4.0 },
+              { flag: "🇧🇷", label: "Brazil", x: "38%", y: "92%", amp: -5, dur: 3.4 },
             ].map((pin, i) => (
               <motion.div
                 key={pin.label}
-                initial={{ opacity: 0, scale: 0 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, scale: 0, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.3 + i * 0.12, type: "spring", stiffness: 300 }}
-                animate={{ y: [0, -5, 0] }}
-                // @ts-ignore
-                style={{ left: pin.x, top: pin.y }}
-                className="absolute"
+                transition={{ delay: 0.4 + i * 0.13, type: "spring", stiffness: 280, damping: 20 }}
+                animate={{ y: [0, pin.amp, 0] }}
+                // @ts-ignore framer-motion animate overrides
+                transition2={{ duration: pin.dur, repeat: Infinity, ease: "easeInOut", delay: i * 0.4 }}
+                style={{ position: "absolute", left: pin.x, top: pin.y }}
               >
-                <div className="flex items-center gap-1.5 rounded-full glass px-3 py-1.5 text-xs font-medium shadow-soft whitespace-nowrap">
+                <motion.div
+                  animate={{ y: [0, pin.amp, 0] }}
+                  transition={{ duration: pin.dur, repeat: Infinity, ease: "easeInOut", delay: i * 0.4 }}
+                  className="flex items-center gap-1.5 rounded-full glass px-3 py-1.5 text-xs font-semibold shadow-soft whitespace-nowrap cursor-default"
+                >
                   <span>{pin.flag}</span>
                   <span>{pin.label}</span>
-                </div>
+                </motion.div>
               </motion.div>
             ))}
           </motion.div>

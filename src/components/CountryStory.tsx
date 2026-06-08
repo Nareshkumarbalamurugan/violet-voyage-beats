@@ -104,10 +104,10 @@ export function CountryStory({ country, index }: { country: Country; index: numb
         {/* Cards */}
         <div className="flex flex-col justify-center gap-6">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30, rotateX: 8 }}
+            whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
             viewport={{ once: true, margin: "-20%" }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.85, delay: 0.2 }}
             className="glass rounded-3xl p-6 shadow-soft"
           >
             <div className="flex items-center justify-between mb-4">
@@ -117,15 +117,22 @@ export function CountryStory({ country, index }: { country: Country; index: numb
               <span className="text-xs text-gold">Food</span>
             </div>
             <div className="flex flex-wrap gap-2">
-              {country.foods.map((f) => (
-                <Link
+              {country.foods.map((f, fi) => (
+                <motion.div
                   key={f.id}
-                  to="/country/$id/food/$foodId"
-                  params={{ id: country.id, foodId: f.id }}
-                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm transition-colors hover:bg-primary/30 hover:border-primary/40"
+                  initial={{ opacity: 0, scale: 0.7, y: 8 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + fi * 0.07, type: "spring", stiffness: 380, damping: 22 }}
                 >
-                  {f.name}
-                </Link>
+                  <Link
+                    to="/country/$id/food/$foodId"
+                    params={{ id: country.id, foodId: f.id }}
+                    className="block rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm transition-all hover:bg-primary/30 hover:border-primary/40 hover:scale-105"
+                  >
+                    {f.name}
+                  </Link>
+                </motion.div>
               ))}
             </div>
           </motion.div>
