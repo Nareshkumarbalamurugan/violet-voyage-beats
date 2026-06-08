@@ -26,7 +26,6 @@ export function CountryCard({ country, index = 0 }: { country: Country; index?: 
           />
           {/* Dark overlay — always dark regardless of theme so white text stays legible */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-          <div className={`absolute inset-0 bg-gradient-to-tr ${country.accent} mix-blend-soft-light opacity-50`} />
 
           {/* Top row */}
           <div className="absolute inset-x-0 top-0 flex items-center justify-between p-4">

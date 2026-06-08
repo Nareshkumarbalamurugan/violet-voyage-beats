@@ -1,8 +1,3 @@
-import japan from "@/assets/japan.jpg";
-import france from "@/assets/france.jpg";
-import italy from "@/assets/italy.jpg";
-import korea from "@/assets/korea.jpg";
-import brazil from "@/assets/brazil.jpg";
 
 export type Food = {
   id: string;
@@ -111,7 +106,7 @@ export const countries: Country[] = [
     tagline: "Tradition Meets Tomorrow.",
     description:
       "Cherry blossoms drifting past neon skylines. A country where every detail is a quiet ceremony.",
-    image: japan,
+    image: unsplash("1490806843957-31f4c9a91c65"),
     rating: 4.9,
     bestSeason: "Mar–May (Cherry Blossom)",
     budget: "$$$",
@@ -211,7 +206,7 @@ export const countries: Country[] = [
     tagline: "The Art of Living.",
     description:
       "Golden hour over Parisian rooftops. Wine, light, and a centuries-old love affair with beauty.",
-    image: france,
+    image: unsplash("1431274172761-fca41d930114"),
     rating: 4.8,
     bestSeason: "Apr–Jun & Sep–Oct",
     budget: "$$$",
@@ -311,7 +306,7 @@ export const countries: Country[] = [
     tagline: "La Dolce Vita.",
     description:
       "Cypress-lined roads, sun-drenched stone, and meals that last the entire afternoon.",
-    image: italy,
+    image: unsplash("1552832230-c0197dd311b5"),
     rating: 4.9,
     bestSeason: "Apr–Jun & Sep",
     budget: "$$",
@@ -415,7 +410,7 @@ export const countries: Country[] = [
     tagline: "Where Innovation Meets Culture.",
     description:
       "Seoul hums under violet neon — palaces and skyscrapers, kimchi and K-pop, all in one breath.",
-    image: korea,
+    image: unsplash("1538485399081-7191377e8241"),
     rating: 4.7,
     bestSeason: "Sep–Nov (Autumn foliage)",
     budget: "$$",
@@ -516,7 +511,7 @@ export const countries: Country[] = [
     tagline: "Rhythm of the Atlantic.",
     description:
       "Mountains, ocean, samba in the streets. A country that moves to its own irresistible beat.",
-    image: brazil,
+    image: unsplash("1483729558449-99ef09a8c325"),
     rating: 4.6,
     bestSeason: "Dec–Mar (Summer & Carnival)",
     budget: "$$",
