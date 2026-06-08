@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ═══════════════════════════════════════════════════════════════
-   VIOLET VOYAGE — LUXURY PREMIUM DESIGN SYSTEM
-   Palette: Obsidian Black · Champagne Gold · Platinum · Royal Navy · Warm Ivory
+   VIOLET VOYAGE — SKY BLUE & WHITE DESIGN SYSTEM
+   Palette: Deep Sky · Ocean Blue · Cloud White · Soft Azure · Pearl
    ═══════════════════════════════════════════════════════════════ */
 
 @theme inline {
@@ -61,126 +61,127 @@
 }
 
 /* ───────────────────────────────────────────────
-   DARK MODE (Default) — Obsidian Luxury
+   DARK MODE (Default) — Deep Ocean Sky
+   Background: deep navy-blue, accents: sky blue, white
    ─────────────────────────────────────────────── */
 :root {
   --radius: 1rem;
 
   /* ── Core surfaces ── */
-  --background:   oklch(0.09 0.014 258);   /* Obsidian black — almost pure black, cool undertone */
-  --foreground:   oklch(0.95 0.018 82);    /* Warm ivory/cream — not cold white */
+  --background:   oklch(0.13 0.04 240);    /* Deep ocean navy */
+  --foreground:   oklch(0.97 0.005 220);   /* Pure cool white */
 
-  --card:         oklch(0.12 0.016 258 / 0.7);
-  --card-foreground: oklch(0.95 0.018 82);
+  --card:         oklch(0.17 0.04 235 / 0.75);
+  --card-foreground: oklch(0.97 0.005 220);
 
-  --popover:      oklch(0.12 0.016 258);
-  --popover-foreground: oklch(0.95 0.018 82);
+  --popover:      oklch(0.17 0.04 235);
+  --popover-foreground: oklch(0.97 0.005 220);
 
-  /* ── Primary — Champagne Gold ── */
-  --primary:          oklch(0.76 0.13 82);   /* Rich champagne gold */
-  --primary-foreground: oklch(0.09 0.014 258); /* Dark text on gold buttons */
+  /* ── Primary — Sky Blue ── */
+  --primary:          oklch(0.68 0.18 230);    /* Vibrant sky blue */
+  --primary-foreground: oklch(0.99 0.002 220); /* White text on sky blue */
 
-  /* ── Secondary — Deep Royal Navy ── */
-  --secondary:          oklch(0.26 0.07 258);
-  --secondary-foreground: oklch(0.95 0.018 82);
+  /* ── Secondary — Deep Blue ── */
+  --secondary:          oklch(0.25 0.07 240);
+  --secondary-foreground: oklch(0.97 0.005 220);
 
   /* ── Muted & subtle ── */
-  --muted:          oklch(0.16 0.018 258);
-  --muted-foreground: oklch(0.60 0.02 82);   /* Warm grey */
+  --muted:          oklch(0.20 0.04 238);
+  --muted-foreground: oklch(0.62 0.04 228);    /* Steel blue-grey */
 
-  /* ── Accent — Amber/Bronze warm glow ── */
-  --accent:          oklch(0.68 0.14 68);    /* Warm amber-bronze */
-  --accent-foreground: oklch(0.09 0.014 258);
+  /* ── Accent — Bright Cyan ── */
+  --accent:          oklch(0.72 0.16 210);     /* Clear cyan-sky */
+  --accent-foreground: oklch(0.10 0.02 240);
 
   /* ── Utility ── */
   --destructive:          oklch(0.60 0.22 25);
   --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(1 0 0 / 0.09);
-  --input:  oklch(1 0 0 / 0.10);
-  --ring:   oklch(0.76 0.13 82);            /* Gold ring */
+  --border: oklch(1 0 0 / 0.10);
+  --input:  oklch(1 0 0 / 0.08);
+  --ring:   oklch(0.68 0.18 230);              /* Sky blue ring */
 
   /* ── Brand tokens ── */
-  --violet:   oklch(0.42 0.12 268);   /* Deep indigo — used sparingly as jewel accent */
-  --lavender: oklch(0.82 0.016 258);  /* Platinum silver */
-  --royal:    oklch(0.32 0.09 258);   /* Deep royal navy */
-  --gold:     oklch(0.80 0.16 82);    /* Rich bright gold */
-  --glow:     oklch(0.76 0.15 82);    /* Gold glow */
+  --violet:   oklch(0.55 0.18 268);            /* Blue-violet accent */
+  --lavender: oklch(0.80 0.06 225);            /* Light steel blue */
+  --royal:    oklch(0.30 0.09 245);            /* Deep royal blue */
+  --gold:     oklch(0.72 0.18 225);            /* Sky blue (replaces gold) */
+  --glow:     oklch(0.68 0.20 230);            /* Sky glow */
 
   /* ── Charts ── */
-  --chart-1: oklch(0.76 0.13 82);
-  --chart-2: oklch(0.60 0.12 258);
-  --chart-3: oklch(0.50 0.08 270);
-  --chart-4: oklch(0.68 0.14 68);
-  --chart-5: oklch(0.40 0.10 260);
+  --chart-1: oklch(0.68 0.18 230);
+  --chart-2: oklch(0.72 0.16 210);
+  --chart-3: oklch(0.55 0.18 268);
+  --chart-4: oklch(0.80 0.06 225);
+  --chart-5: oklch(0.40 0.12 245);
 
   /* ── Sidebar ── */
-  --sidebar:          oklch(0.11 0.015 258);
-  --sidebar-foreground: oklch(0.95 0.018 82);
-  --sidebar-primary:  oklch(0.76 0.13 82);
-  --sidebar-primary-foreground: oklch(0.09 0.014 258);
-  --sidebar-accent:   oklch(0.18 0.018 258);
-  --sidebar-accent-foreground: oklch(0.95 0.018 82);
+  --sidebar:          oklch(0.14 0.04 240);
+  --sidebar-foreground: oklch(0.97 0.005 220);
+  --sidebar-primary:  oklch(0.68 0.18 230);
+  --sidebar-primary-foreground: oklch(0.99 0.002 220);
+  --sidebar-accent:   oklch(0.20 0.04 238);
+  --sidebar-accent-foreground: oklch(0.97 0.005 220);
   --sidebar-border:   oklch(1 0 0 / 0.08);
-  --sidebar-ring:     oklch(0.76 0.13 82);
+  --sidebar-ring:     oklch(0.68 0.18 230);
 
   /* ── Gradients ── */
-  --gradient-violet: linear-gradient(135deg, oklch(0.76 0.13 82), oklch(0.68 0.14 68));
+  --gradient-violet: linear-gradient(135deg, oklch(0.68 0.18 230), oklch(0.72 0.16 210));
 
-  /* Gold + navy aurora — richer & warmer than violet haze */
+  /* Sky + ocean aurora */
   --gradient-aurora:
-    radial-gradient(60% 50% at 50% 0%,   oklch(0.76 0.14 82 / 0.28), transparent 70%),
-    radial-gradient(40% 40% at 80% 80%,  oklch(0.40 0.10 258 / 0.30), transparent 70%),
-    radial-gradient(35% 45% at 10% 65%,  oklch(0.68 0.13 68 / 0.20), transparent 70%),
-    radial-gradient(50% 30% at 50% 100%, oklch(0.26 0.07 258 / 0.40), transparent 70%);
+    radial-gradient(60% 50% at 50% 0%,   oklch(0.68 0.20 230 / 0.30), transparent 70%),
+    radial-gradient(40% 40% at 80% 80%,  oklch(0.45 0.14 250 / 0.30), transparent 70%),
+    radial-gradient(35% 45% at 10% 65%,  oklch(0.72 0.16 210 / 0.20), transparent 70%),
+    radial-gradient(50% 30% at 50% 100%, oklch(0.25 0.08 245 / 0.40), transparent 70%);
 
   /* ── Shadows ── */
-  --shadow-glow: 0 20px 80px -20px oklch(0.76 0.14 82 / 0.50);  /* Gold glow */
-  --shadow-soft: 0 30px 60px -30px oklch(0 0 0 / 0.75);
+  --shadow-glow: 0 20px 80px -20px oklch(0.68 0.20 230 / 0.55);  /* Sky blue glow */
+  --shadow-soft: 0 30px 60px -30px oklch(0 0 0 / 0.70);
 }
 
 /* ───────────────────────────────────────────────
-   LIGHT MODE — Ivory & Gold Luxury
+   LIGHT MODE — Cloud White & Sky Blue
    ─────────────────────────────────────────────── */
 .light {
-  --background:   oklch(0.97 0.012 80);    /* Warm cream/ivory */
-  --foreground:   oklch(0.14 0.018 258);   /* Deep charcoal — warm dark */
+  --background:   oklch(0.98 0.006 220);   /* Cloud white with cool tint */
+  --foreground:   oklch(0.15 0.04 240);    /* Deep navy text */
 
-  --card:         oklch(1 0 0 / 0.80);
-  --card-foreground: oklch(0.14 0.018 258);
+  --card:         oklch(1 0 0 / 0.85);
+  --card-foreground: oklch(0.15 0.04 240);
 
-  --popover:      oklch(0.99 0.008 80);
-  --popover-foreground: oklch(0.14 0.018 258);
+  --popover:      oklch(0.99 0.004 220);
+  --popover-foreground: oklch(0.15 0.04 240);
 
-  --primary:          oklch(0.60 0.14 82);   /* Slightly deeper gold for light bg */
-  --primary-foreground: oklch(0.99 0.004 80);
+  --primary:          oklch(0.55 0.20 230);   /* Deeper sky blue for light bg */
+  --primary-foreground: oklch(0.99 0.002 220);
 
-  --secondary:        oklch(0.88 0.02 258);
-  --muted:            oklch(0.93 0.014 80);
-  --muted-foreground: oklch(0.44 0.02 258);
+  --secondary:        oklch(0.88 0.04 228);
+  --muted:            oklch(0.93 0.016 225);
+  --muted-foreground: oklch(0.44 0.04 240);
 
-  --accent:           oklch(0.62 0.13 68);
+  --accent:           oklch(0.58 0.18 215);
   --accent-foreground: oklch(0.99 0 0);
 
-  --border:  oklch(0.14 0.018 258 / 0.10);
-  --input:   oklch(0.14 0.018 258 / 0.10);
-  --ring:    oklch(0.60 0.14 82);
+  --border:  oklch(0.15 0.04 240 / 0.10);
+  --input:   oklch(0.15 0.04 240 / 0.08);
+  --ring:    oklch(0.55 0.20 230);
 
-  --lavender: oklch(0.45 0.04 258);   /* Navy-silver on light bg */
-  --gold:     oklch(0.65 0.16 82);
+  --lavender: oklch(0.50 0.06 240);
+  --gold:     oklch(0.58 0.20 228);           /* Sky blue on light bg */
 
   --gradient-aurora:
-    radial-gradient(60% 50% at 50% 0%,   oklch(0.76 0.10 82 / 0.18), transparent 70%),
-    radial-gradient(40% 40% at 80% 80%,  oklch(0.60 0.08 258 / 0.12), transparent 70%),
-    radial-gradient(35% 45% at 10% 65%,  oklch(0.68 0.10 68 / 0.12), transparent 70%);
+    radial-gradient(60% 50% at 50% 0%,   oklch(0.68 0.14 230 / 0.18), transparent 70%),
+    radial-gradient(40% 40% at 80% 80%,  oklch(0.55 0.12 250 / 0.12), transparent 70%),
+    radial-gradient(35% 45% at 10% 65%,  oklch(0.72 0.12 210 / 0.12), transparent 70%);
 
-  --shadow-glow: 0 20px 80px -20px oklch(0.60 0.14 82 / 0.35);
-  --shadow-soft: 0 30px 60px -30px oklch(0.26 0.07 258 / 0.22);
+  --shadow-glow: 0 20px 80px -20px oklch(0.55 0.20 230 / 0.35);
+  --shadow-soft: 0 30px 60px -30px oklch(0.20 0.06 240 / 0.20);
 }
 
 .light .glass {
-  background: oklch(1 0 0 / 0.60);
+  background: oklch(1 0 0 / 0.65);
   backdrop-filter: blur(24px) saturate(130%);
-  border-color: oklch(0.60 0.10 82 / 0.18);   /* Gold-tinted glass border */
+  border-color: oklch(0.55 0.14 230 / 0.15);  /* Sky blue–tinted glass border */
 }
 
 /* ───────────────────────────────────────────────
@@ -207,47 +208,47 @@
    UTILITIES
    ─────────────────────────────────────────────── */
 
-/* Glassmorphism — gold-tinted luxury glass */
+/* Glassmorphism — sky blue–tinted luxury glass */
 @utility glass {
-  background: oklch(1 0 0 / 0.06);
+  background: oklch(1 0 0 / 0.07);
   backdrop-filter: blur(28px) saturate(150%);
   -webkit-backdrop-filter: blur(28px) saturate(150%);
-  border: 1px solid oklch(1 0 0 / 0.11);
+  border: 1px solid oklch(1 0 0 / 0.13);
 }
 
-/* Premium gold gradient text */
+/* Sky blue gradient text */
 @utility text-gradient-violet {
   background: linear-gradient(
     135deg,
-    oklch(0.96 0.06 88)   0%,
-    oklch(0.84 0.14 82)  40%,
-    oklch(0.70 0.14 68)  80%,
-    oklch(0.60 0.10 258) 100%
+    oklch(0.96 0.04 220)   0%,
+    oklch(0.80 0.18 230)  40%,
+    oklch(0.65 0.20 228)  70%,
+    oklch(0.50 0.16 250) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-/* Pure gold gradient text */
+/* Pure sky blue gradient text */
 @utility text-gradient-gold {
   background: linear-gradient(
     135deg,
-    oklch(0.96 0.08 90) 0%,
-    oklch(0.82 0.16 82) 50%,
-    oklch(0.68 0.14 65) 100%
+    oklch(0.96 0.05 220) 0%,
+    oklch(0.78 0.20 230) 50%,
+    oklch(0.60 0.18 235) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-/* Gold + Navy aurora bg */
+/* Sky aurora bg */
 @utility bg-aurora {
   background-image: var(--gradient-aurora);
 }
 
-/* Gold glow shadow */
+/* Sky glow shadow */
 @utility shadow-glow {
   box-shadow: var(--shadow-glow);
 }
@@ -268,7 +269,7 @@
 }
 .card-lift:hover {
   transform: translateY(-8px);
-  box-shadow: 0 24px 80px -16px oklch(0.76 0.14 82 / 0.45);
+  box-shadow: 0 24px 80px -16px oklch(0.68 0.20 230 / 0.45);
 }
 
 /* Form input */
@@ -283,29 +284,29 @@
 }
 .input:focus {
   outline: none;
-  border-color: oklch(0.76 0.13 82 / 0.8);
-  box-shadow: 0 0 0 3px oklch(0.76 0.13 82 / 0.22);
+  border-color: oklch(0.68 0.18 230 / 0.80);
+  box-shadow: 0 0 0 3px oklch(0.68 0.18 230 / 0.22);
 }
 .input::placeholder { color: var(--muted-foreground); }
 
 /* Option tags in selects */
-.input > option { background-color: oklch(0.12 0.016 258); }
+.input > option { background-color: oklch(0.17 0.04 235); }
 
-/* Custom scrollbar — gold track */
+/* Custom scrollbar — sky blue track */
 html { scroll-behavior: smooth; }
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(
     to bottom,
-    oklch(0.80 0.16 82),
-    oklch(0.68 0.14 68),
-    oklch(0.40 0.10 258)
+    oklch(0.80 0.18 225),
+    oklch(0.65 0.20 230),
+    oklch(0.45 0.14 245)
   );
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: oklch(0.84 0.14 82);
+  background: oklch(0.82 0.18 225);
 }
 
 /* Marquee animation */
@@ -322,15 +323,15 @@ html { scroll-behavior: smooth; }
 }
 .animate-float { animation: float-slow 7s ease-in-out infinite; }
 
-/* Shimmer (for skeleton loaders etc.) */
+/* Shimmer */
 @keyframes shimmer {
   0%   { background-position: -200% 0; }
   100% { background-position:  200% 0; }
 }
 
-/* Gold pulse — used on CTA glow rings */
+/* Sky pulse — used on CTA glow rings */
 @keyframes gold-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 oklch(0.76 0.13 82 / 0.45); }
-  50%       { box-shadow: 0 0 0 12px oklch(0.76 0.13 82 / 0); }
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.68 0.18 230 / 0.50); }
+  50%       { box-shadow: 0 0 0 12px oklch(0.68 0.18 230 / 0); }
 }
 .animate-gold-pulse { animation: gold-pulse 2.5s ease-in-out infinite; }

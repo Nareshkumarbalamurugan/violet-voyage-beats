@@ -36,10 +36,10 @@ export function Hero() {
       <div className="absolute inset-0 bg-aurora" />
       <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/10 to-background" />
 
-      {/* Floating luxury orbs — champagne gold + royal navy */}
+      {/* Floating orbs — sky blue + deep blue */}
       <motion.div
         aria-hidden
-        className="absolute -left-40 top-1/3 h-[28rem] w-[28rem] rounded-full bg-gold/20 blur-[100px]"
+        className="absolute -left-40 top-1/3 h-[28rem] w-[28rem] rounded-full bg-primary/20 blur-[100px]"
         animate={{ y: [0, 30, 0], scale: [1, 1.06, 1] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -51,7 +51,7 @@ export function Hero() {
       />
       <motion.div
         aria-hidden
-        className="absolute left-1/2 top-0 h-64 w-[60vw] -translate-x-1/2 rounded-full bg-primary/10 blur-[80px]"
+        className="absolute left-1/2 top-0 h-64 w-[60vw] -translate-x-1/2 rounded-full bg-accent/15 blur-[80px]"
         animate={{ opacity: [0.5, 1, 0.5] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
