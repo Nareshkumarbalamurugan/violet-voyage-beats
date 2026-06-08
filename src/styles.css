@@ -87,25 +87,28 @@
 
   /* ── Muted & subtle ── */
   --muted:          oklch(0.20 0.04 238);
-  --muted-foreground: oklch(0.74 0.04 228);    /* Brighter steel-blue — legible on dark navy */
+  --muted-foreground: oklch(0.78 0.03 225);    /* Light cool-grey — clearly legible on dark */
 
-  /* ── Accent — Bright Cyan ── */
-  --accent:          oklch(0.78 0.16 200);     /* Bright cyan — high contrast */
-  --accent-foreground: oklch(0.10 0.02 240);
+  /* ── Accent — Sky Blue (buttons/backgrounds only) ── */
+  --accent:          oklch(0.68 0.18 215);     /* Sky blue for interactive elements */
+  --accent-foreground: oklch(0.99 0.002 220);  /* White text on accent */
 
   /* ── Utility ── */
   --destructive:          oklch(0.60 0.22 25);
   --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(1 0 0 / 0.10);
-  --input:  oklch(1 0 0 / 0.08);
-  --ring:   oklch(0.68 0.18 230);              /* Sky blue ring */
+  --border: oklch(1 0 0 / 0.12);
+  --input:  oklch(1 0 0 / 0.10);
+  --ring:   oklch(0.68 0.18 230);
 
   /* ── Brand tokens ── */
-  --violet:   oklch(0.70 0.18 268);            /* Bright blue-violet — visible on dark */
-  --lavender: oklch(0.88 0.07 220);            /* Pale ice blue — bright & legible */
+  --violet:   oklch(0.82 0.10 255);            /* Periwinkle — clearly distinct, legible */
+  --lavender: oklch(0.92 0.04 220);            /* Near-white ice — always visible */
   --royal:    oklch(0.35 0.09 245);            /* Deep royal blue */
-  --gold:     oklch(0.88 0.14 210);            /* Bright sky-cyan — high contrast on dark navy */
-  --glow:     oklch(0.72 0.20 225);            /* Sky glow */
+  /* --gold = accent label colour: WHITE with slight warm tint.
+     Sky-blue-on-navy was invisible (same hue family).
+     Pure bright white always reads on any dark surface.          */
+  --gold:     oklch(0.97 0.012 200);           /* Bright ice-white — maximum contrast on dark */
+  --glow:     oklch(0.68 0.20 225);
 
   /* ── Charts ── */
   --chart-1: oklch(0.68 0.18 230);
@@ -166,8 +169,8 @@
   --input:   oklch(0.15 0.04 240 / 0.08);
   --ring:    oklch(0.55 0.20 230);
 
-  --lavender: oklch(0.40 0.08 240);           /* Deep blue — legible on white */
-  --gold:     oklch(0.42 0.22 230);           /* Deep vivid sky blue — high contrast on white */
+  --lavender: oklch(0.35 0.08 240);           /* Deep blue — legible on white */
+  --gold:     oklch(0.35 0.18 230);           /* Deep navy-blue — strong contrast on white bg */
 
   --gradient-aurora:
     radial-gradient(60% 50% at 50% 0%,   oklch(0.68 0.14 230 / 0.18), transparent 70%),
@@ -181,7 +184,22 @@
 .light .glass {
   background: oklch(1 0 0 / 0.65);
   backdrop-filter: blur(24px) saturate(130%);
-  border-color: oklch(0.55 0.14 230 / 0.15);  /* Sky blue–tinted glass border */
+  border-color: oklch(0.50 0.16 230 / 0.20);
+}
+
+/* Light mode: override gradient text to dark-on-light (white → sky = invisible on white bg) */
+.light .text-gradient-violet,
+.light .text-gradient-gold {
+  background: linear-gradient(
+    135deg,
+    oklch(0.20 0.06 245)  0%,   /* deep navy */
+    oklch(0.35 0.16 235) 40%,   /* deep sky blue */
+    oklch(0.50 0.20 228) 75%,   /* mid sky blue */
+    oklch(0.40 0.18 235) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 /* ───────────────────────────────────────────────
@@ -216,27 +234,28 @@
   border: 1px solid oklch(1 0 0 / 0.13);
 }
 
-/* Sky blue gradient text — bright white → sky → cyan */
+/* Hero heading gradient: pure white → sky blue — always legible */
 @utility text-gradient-violet {
   background: linear-gradient(
     135deg,
-    oklch(0.98 0.01 220)  0%,   /* near-white ice */
-    oklch(0.90 0.12 215) 35%,   /* bright sky */
-    oklch(0.78 0.20 225) 65%,   /* vivid sky blue */
-    oklch(0.65 0.18 240) 100%   /* deeper blue */
+    oklch(1.00 0.00 0)    0%,   /* pure white */
+    oklch(0.96 0.03 215) 30%,   /* ice white */
+    oklch(0.82 0.16 220) 65%,   /* bright sky blue */
+    oklch(0.65 0.20 235) 100%   /* vivid blue */
   );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-/* Bright sky-to-cyan gradient text */
+/* Page heading gradient: white → sky → deeper blue */
 @utility text-gradient-gold {
   background: linear-gradient(
     135deg,
-    oklch(0.97 0.04 215) 0%,    /* ice white */
-    oklch(0.88 0.16 210) 45%,   /* bright sky-cyan */
-    oklch(0.72 0.20 228) 100%   /* saturated sky blue */
+    oklch(1.00 0.00 0)   0%,    /* pure white */
+    oklch(0.94 0.05 210) 35%,   /* near-white sky tint */
+    oklch(0.78 0.18 222) 70%,   /* sky blue */
+    oklch(0.62 0.20 232) 100%   /* deeper blue */
   );
   -webkit-background-clip: text;
   background-clip: text;
