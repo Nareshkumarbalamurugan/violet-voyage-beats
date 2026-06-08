@@ -99,8 +99,9 @@ const a = (attr: AttrInput): Attraction => ({
   image: img(attr.query ?? attr.name, "landmark"),
 });
 
-/* Scenic landscape image for countries that don't ship a bundled asset */
-const place = (q: string) => img(q, "landscape,travel");
+/* Curated, stable Unsplash photo for countries without a bundled asset */
+const unsplash = (id: string) =>
+  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1600&q=80`;
 
 export const countries: Country[] = [
   {
@@ -201,7 +202,7 @@ export const countries: Country[] = [
       holidays: ["Golden Week", "Obon", "New Year (Shogatsu)"],
       customs: ["Gift-giving (omiyage)", "Slurping noodles is polite", "Onsen bathing rituals"],
     },
-    accent: "from-pink-300/40 to-violet-500/40",
+    accent: "from-sky-300/40 to-cyan-500/40",
   },
   {
     id: "france",
@@ -301,7 +302,7 @@ export const countries: Country[] = [
       holidays: ["Bastille Day (Jul 14)", "Toussaint", "Assumption"],
       customs: ["Long leisurely meals", "Wine with lunch", "August holidays"],
     },
-    accent: "from-amber-300/40 to-violet-500/40",
+    accent: "from-amber-300/40 to-sky-500/40",
   },
   {
     id: "italy",
@@ -405,7 +406,7 @@ export const countries: Country[] = [
       holidays: ["Ferragosto (Aug 15)", "Republic Day", "Epiphany"],
       customs: ["Aperitivo hour", "Passeggiata evening stroll", "Long Sunday lunches"],
     },
-    accent: "from-orange-300/40 to-violet-500/40",
+    accent: "from-orange-300/40 to-sky-500/40",
   },
   {
     id: "korea",
@@ -506,7 +507,7 @@ export const countries: Country[] = [
       holidays: ["Seollal", "Chuseok", "Liberation Day"],
       customs: ["Respect for elders (nunchi)", "Communal side dishes (banchan)", "Café culture"],
     },
-    accent: "from-fuchsia-400/40 to-violet-600/40",
+    accent: "from-sky-400/40 to-blue-600/40",
   },
   {
     id: "brazil",
@@ -608,7 +609,7 @@ export const countries: Country[] = [
       holidays: ["Carnival", "Independence Day (Sep 7)", "Tiradentes"],
       customs: ["Beach culture", "Churrasco barbecues", "Samba circles (roda)"],
     },
-    accent: "from-emerald-300/40 to-violet-500/40",
+    accent: "from-emerald-300/40 to-cyan-500/40",
   },
 
   /* ─────────────── INDIA ─────────────── */
@@ -619,7 +620,7 @@ export const countries: Country[] = [
     tagline: "A Million Stories, One Land.",
     description:
       "From snow-dusted Himalayas to spice-scented bazaars and palaces of marble — a sensory symphony of color, faith, and flavour.",
-    image: place("india taj mahal"),
+    image: unsplash("1564507592333-c60657eea523"),
     rating: 4.7,
     bestSeason: "Oct–Mar (cool & dry)",
     budget: "$",
@@ -666,7 +667,7 @@ export const countries: Country[] = [
     tagline: "Land of Smiles.",
     description:
       "Gilded temples, turquoise islands, and night markets perfumed with lemongrass and chilli — serenity and chaos in perfect balance.",
-    image: place("thailand temple beach"),
+    image: unsplash("1528181304800-259b08848526"),
     rating: 4.8,
     bestSeason: "Nov–Mar (cool, dry)",
     budget: "$",
@@ -702,7 +703,7 @@ export const countries: Country[] = [
       holidays: ["Songkran", "King's Birthday", "Loi Krathong"],
       customs: ["The wai greeting", "Spirit houses", "Floating krathong offerings"],
     },
-    accent: "from-violet-300/40 to-sky-500/40",
+    accent: "from-cyan-300/40 to-sky-500/40",
   },
 
   /* ─────────────── SPAIN ─────────────── */
@@ -713,7 +714,7 @@ export const countries: Country[] = [
     tagline: "Sun, Soul & Siesta.",
     description:
       "Flamenco heels on cobbled streets, Gaudí's dreamlike spires, and tapas shared until midnight — passion lived out loud.",
-    image: place("spain barcelona architecture"),
+    image: unsplash("1583422409516-2895a77efded"),
     rating: 4.7,
     bestSeason: "Apr–Jun & Sep–Oct",
     budget: "$$",
@@ -760,7 +761,7 @@ export const countries: Country[] = [
     tagline: "Where Time Began.",
     description:
       "Pyramids piercing a desert sky, a sacred river of life, and 5,000 years of pharaohs whispering from temple walls.",
-    image: place("egypt pyramids nile"),
+    image: unsplash("1503177119275-0aa32b3a9368"),
     rating: 4.6,
     bestSeason: "Oct–Apr (mild)",
     budget: "$",
@@ -807,7 +808,7 @@ export const countries: Country[] = [
     tagline: "Color, Spice & Soul.",
     description:
       "Aztec pyramids and Pacific surf, mariachi at midnight and markets ablaze with chillies — a country that lives in vivid technicolor.",
-    image: place("mexico chichen itza beach"),
+    image: unsplash("1518105779142-d975f22f1b0a"),
     rating: 4.7,
     bestSeason: "Nov–Apr (dry season)",
     budget: "$",
@@ -854,7 +855,7 @@ export const countries: Country[] = [
     tagline: "Cradle of the West.",
     description:
       "Whitewashed villages tumbling into the Aegean, marble temples on sun-baked hills, and the slow pleasure of olives, wine and sea.",
-    image: place("greece santorini aegean"),
+    image: unsplash("1570077188670-e3a8d69ac5ff"),
     rating: 4.8,
     bestSeason: "May–Jun & Sep–Oct",
     budget: "$$",
@@ -901,7 +902,7 @@ export const countries: Country[] = [
     tagline: "The Wild & Wide South.",
     description:
       "Red desert horizons, the world's oldest rainforests, a living reef of impossible colour, and laid-back cities hugging golden coasts.",
-    image: place("australia sydney opera reef"),
+    image: unsplash("1506973035872-a4ec16b8e8d9"),
     rating: 4.7,
     bestSeason: "Sep–Nov & Mar–May",
     budget: "$$$",
@@ -948,7 +949,7 @@ export const countries: Country[] = [
     tagline: "A Feast for the Senses.",
     description:
       "Labyrinth souks heavy with saffron and leather, Saharan dunes glowing at dusk, and mint tea poured from a silver height.",
-    image: place("morocco marrakech sahara"),
+    image: unsplash("1597212618440-806262de4f6b"),
     rating: 4.6,
     bestSeason: "Mar–May & Sep–Nov",
     budget: "$",
