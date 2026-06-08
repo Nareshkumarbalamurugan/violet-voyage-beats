@@ -6,7 +6,7 @@
 
 /* ═══════════════════════════════════════════════════════════════
    VIOLET VOYAGE — SKY BLUE & WHITE DESIGN SYSTEM
-   Palette: Deep Sky · Ocean Blue · Cloud White · Soft Azure · Pearl
+   Palette: Deep Ocean · Sky Blue · Bright Cyan · Pearl White · Ice
    ═══════════════════════════════════════════════════════════════ */
 
 @theme inline {
@@ -87,10 +87,10 @@
 
   /* ── Muted & subtle ── */
   --muted:          oklch(0.20 0.04 238);
-  --muted-foreground: oklch(0.62 0.04 228);    /* Steel blue-grey */
+  --muted-foreground: oklch(0.74 0.04 228);    /* Brighter steel-blue — legible on dark navy */
 
   /* ── Accent — Bright Cyan ── */
-  --accent:          oklch(0.72 0.16 210);     /* Clear cyan-sky */
+  --accent:          oklch(0.78 0.16 200);     /* Bright cyan — high contrast */
   --accent-foreground: oklch(0.10 0.02 240);
 
   /* ── Utility ── */
@@ -101,11 +101,11 @@
   --ring:   oklch(0.68 0.18 230);              /* Sky blue ring */
 
   /* ── Brand tokens ── */
-  --violet:   oklch(0.55 0.18 268);            /* Blue-violet accent */
-  --lavender: oklch(0.80 0.06 225);            /* Light steel blue */
-  --royal:    oklch(0.30 0.09 245);            /* Deep royal blue */
-  --gold:     oklch(0.72 0.18 225);            /* Sky blue (replaces gold) */
-  --glow:     oklch(0.68 0.20 230);            /* Sky glow */
+  --violet:   oklch(0.70 0.18 268);            /* Bright blue-violet — visible on dark */
+  --lavender: oklch(0.88 0.07 220);            /* Pale ice blue — bright & legible */
+  --royal:    oklch(0.35 0.09 245);            /* Deep royal blue */
+  --gold:     oklch(0.88 0.14 210);            /* Bright sky-cyan — high contrast on dark navy */
+  --glow:     oklch(0.72 0.20 225);            /* Sky glow */
 
   /* ── Charts ── */
   --chart-1: oklch(0.68 0.18 230);
@@ -157,17 +157,17 @@
 
   --secondary:        oklch(0.88 0.04 228);
   --muted:            oklch(0.93 0.016 225);
-  --muted-foreground: oklch(0.44 0.04 240);
+  --muted-foreground: oklch(0.38 0.06 240);   /* Dark navy-grey — strong contrast on white */
 
-  --accent:           oklch(0.58 0.18 215);
+  --accent:           oklch(0.45 0.20 228);   /* Deep sky blue — visible on white */
   --accent-foreground: oklch(0.99 0 0);
 
   --border:  oklch(0.15 0.04 240 / 0.10);
   --input:   oklch(0.15 0.04 240 / 0.08);
   --ring:    oklch(0.55 0.20 230);
 
-  --lavender: oklch(0.50 0.06 240);
-  --gold:     oklch(0.58 0.20 228);           /* Sky blue on light bg */
+  --lavender: oklch(0.40 0.08 240);           /* Deep blue — legible on white */
+  --gold:     oklch(0.42 0.22 230);           /* Deep vivid sky blue — high contrast on white */
 
   --gradient-aurora:
     radial-gradient(60% 50% at 50% 0%,   oklch(0.68 0.14 230 / 0.18), transparent 70%),
@@ -216,27 +216,27 @@
   border: 1px solid oklch(1 0 0 / 0.13);
 }
 
-/* Sky blue gradient text */
+/* Sky blue gradient text — bright white → sky → cyan */
 @utility text-gradient-violet {
   background: linear-gradient(
     135deg,
-    oklch(0.96 0.04 220)   0%,
-    oklch(0.80 0.18 230)  40%,
-    oklch(0.65 0.20 228)  70%,
-    oklch(0.50 0.16 250) 100%
+    oklch(0.98 0.01 220)  0%,   /* near-white ice */
+    oklch(0.90 0.12 215) 35%,   /* bright sky */
+    oklch(0.78 0.20 225) 65%,   /* vivid sky blue */
+    oklch(0.65 0.18 240) 100%   /* deeper blue */
   );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-/* Pure sky blue gradient text */
+/* Bright sky-to-cyan gradient text */
 @utility text-gradient-gold {
   background: linear-gradient(
     135deg,
-    oklch(0.96 0.05 220) 0%,
-    oklch(0.78 0.20 230) 50%,
-    oklch(0.60 0.18 235) 100%
+    oklch(0.97 0.04 215) 0%,    /* ice white */
+    oklch(0.88 0.16 210) 45%,   /* bright sky-cyan */
+    oklch(0.72 0.20 228) 100%   /* saturated sky blue */
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -269,7 +269,7 @@
 }
 .card-lift:hover {
   transform: translateY(-8px);
-  box-shadow: 0 24px 80px -16px oklch(0.68 0.20 230 / 0.45);
+  box-shadow: 0 24px 80px -16px oklch(0.72 0.20 220 / 0.50);
 }
 
 /* Form input */
@@ -284,8 +284,8 @@
 }
 .input:focus {
   outline: none;
-  border-color: oklch(0.68 0.18 230 / 0.80);
-  box-shadow: 0 0 0 3px oklch(0.68 0.18 230 / 0.22);
+  border-color: oklch(0.72 0.18 220 / 0.90);
+  box-shadow: 0 0 0 3px oklch(0.72 0.18 220 / 0.25);
 }
 .input::placeholder { color: var(--muted-foreground); }
 
