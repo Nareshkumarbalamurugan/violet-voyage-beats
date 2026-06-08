@@ -1,9 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  motion, AnimatePresence, useScroll, useTransform,
+  useMotionValueEvent,
+} from "framer-motion";
 import { useEffect, useRef, useState, useCallback } from "react";
 import {
   Search, Compass, ArrowRight, X, MapPin,
-  Thermometer, Wallet, Plane, Globe2,
+  Thermometer, Wallet, Plane, Globe2, ChevronDown,
+  Calendar, ShieldCheck, Star, Sparkles,
 } from "lucide-react";
 import { countries } from "@/data/countries";
 
@@ -22,6 +26,10 @@ const MARKERS = [
   { id: "thailand", name: "Thailand",    flag: "🇹🇭", lat:  13.7563, lng:  100.5018, color: "#22d3ee", ring: "rgba(34,211,238,",  region: "Southeast Asia" },
   { id: "spain",    name: "Spain",       flag: "🇪🇸", lat:  40.4168, lng:   -3.7038, color: "#fb7185", ring: "rgba(251,113,133,", region: "Southern Europe"},
   { id: "egypt",    name: "Egypt",       flag: "🇪🇬", lat:  30.0444, lng:   31.2357, color: "#facc15", ring: "rgba(250,204,21,",  region: "North Africa"   },
+  { id: "mexico",   name: "Mexico",      flag: "🇲🇽", lat:  19.4326, lng:  -99.1332, color: "#fb923c", ring: "rgba(251,146,60,",  region: "North America"  },
+  { id: "greece",   name: "Greece",      flag: "🇬🇷", lat:  37.9838, lng:   23.7275, color: "#60a5fa", ring: "rgba(96,165,250,",  region: "Southern Europe"},
+  { id: "australia",name: "Australia",   flag: "🇦🇺", lat: -33.8688, lng:  151.2093, color: "#2dd4bf", ring: "rgba(45,212,191,",  region: "Oceania"        },
+  { id: "morocco",  name: "Morocco",     flag: "🇲🇦", lat:  31.6295, lng:   -7.9811, color: "#f59e0b", ring: "rgba(245,158,11,",  region: "North Africa"   },
 ];
 
 type Marker = (typeof MARKERS)[0];
@@ -313,6 +321,159 @@ function DetailCard({
   );
 }
 
+/* ─── Scroll-reveal info row ──────────────────────────────────── */
+function InfoRow({ marker, index }: { marker: Marker; index: number }) {
+  const data = countries.find((c) => c.id === marker.id);
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const imgY = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]);
+  const flip = index % 2 === 1;
+
+  if (!data) return null;
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 80 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-12%" }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      className={`relative mx-auto grid w-full max-w-6xl items-center gap-8 px-6 py-16 lg:grid-cols-2 lg:gap-16 ${
+        flip ? "lg:[&>*:first-child]:order-2" : ""
+      }`}
+    >
+      {/* Image card with parallax */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9, x: flip ? 40 : -40 }}
+        whileInView={{ opacity: 1, scale: 1, x: 0 }}
+        viewport={{ once: true, margin: "-12%" }}
+        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        className="group relative aspect-[4/3] overflow-hidden rounded-3xl border"
+        style={{ borderColor: marker.color + "33", boxShadow: `0 30px 80px -30px ${marker.color}55` }}
+      >
+        <motion.img
+          src={data.image}
+          alt={data.name}
+          loading="lazy"
+          style={{ y: imgY }}
+          className="absolute inset-0 h-[124%] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+        <div className="absolute left-4 top-4 flex items-center gap-2">
+          <span className="text-3xl drop-shadow">{marker.flag}</span>
+          <span
+            className="rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider backdrop-blur-sm"
+            style={{ background: marker.color + "30", color: "#fff", border: `1px solid ${marker.color}55` }}
+          >
+            {marker.region}
+          </span>
+        </div>
+        <div className="absolute bottom-4 left-4 flex items-center gap-1.5 rounded-full bg-black/50 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
+          <Star className="h-3 w-3 fill-amber-300 text-amber-300" /> {data.rating}
+        </div>
+      </motion.div>
+
+      {/* Text */}
+      <div>
+        <p className="text-xs font-semibold uppercase tracking-[0.3em]" style={{ color: marker.color }}>
+          {String(index + 1).padStart(2, "0")} · Destination
+        </p>
+        <h3 className="mt-2 text-4xl font-semibold leading-tight md:text-5xl text-white">{data.name}</h3>
+        <p className="mt-3 text-lg text-white/70 font-display">{data.tagline}</p>
+        <p className="mt-4 max-w-md text-sm leading-relaxed text-white/55">{data.description}</p>
+
+        {/* Fact chips */}
+        <div className="mt-6 flex flex-wrap gap-2">
+          {[
+            { icon: <Calendar className="h-3.5 w-3.5" />, text: data.bestSeason },
+            { icon: <Wallet className="h-3.5 w-3.5" />, text: `${data.budget} · ${data.budgetLabel}` },
+            { icon: <ShieldCheck className="h-3.5 w-3.5" />, text: `Safety ${data.safety}` },
+            { icon: <Sparkles className="h-3.5 w-3.5" />, text: `${data.foods.length} signature dishes` },
+          ].map((chip, i) => (
+            <span
+              key={i}
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/12 bg-white/5 px-3 py-1.5 text-xs text-white/80"
+            >
+              <span style={{ color: marker.color }}>{chip.icon}</span>
+              {chip.text}
+            </span>
+          ))}
+        </div>
+
+        {/* Cities */}
+        <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-white/45">
+          <MapPin className="h-3.5 w-3.5" style={{ color: marker.color }} />
+          {data.cities.join(" · ")}
+        </div>
+
+        {/* CTA */}
+        <Link
+          to="/country/$id"
+          params={{ id: marker.id }}
+          className="group mt-7 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold text-white transition-all hover:scale-[1.04] active:scale-95"
+          style={{ background: `linear-gradient(135deg, ${marker.color}ee, ${marker.color}88)` }}
+        >
+          Explore {data.name}
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </Link>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ─── Info page (revealed on scroll) ──────────────────────────── */
+function InfoSection() {
+  return (
+    <section className="relative z-10 bg-gradient-to-b from-transparent via-[oklch(0.09_0.035_240)] to-[oklch(0.07_0.03_245)] pb-32 pt-10">
+      {/* Section header */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-15%" }}
+        transition={{ duration: 0.8 }}
+        className="mx-auto max-w-3xl px-6 pb-6 pt-20 text-center"
+      >
+        <p className="mb-3 flex items-center justify-center gap-2 text-xs uppercase tracking-[0.35em] text-sky-400/90">
+          <Compass className="h-3.5 w-3.5" /> The Atlas
+        </p>
+        <h2 className="text-4xl font-semibold md:text-6xl text-gradient-gold">
+          {MARKERS.length} Worlds to Wander
+        </h2>
+        <p className="mx-auto mt-4 max-w-lg text-white/55">
+          Scroll on — every glowing marker on the globe opens into a living story
+          of food, music, culture and wonder.
+        </p>
+      </motion.div>
+
+      {/* Rows */}
+      <div>
+        {MARKERS.map((m, i) => (
+          <InfoRow key={m.id} marker={m} index={i} />
+        ))}
+      </div>
+
+      {/* Footer CTA */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="mx-auto mt-16 max-w-xl px-6 text-center"
+      >
+        <Link
+          to="/explore"
+          className="inline-flex items-center gap-2 rounded-full glass px-7 py-4 text-sm font-semibold text-white transition-transform hover:scale-105"
+        >
+          Browse all destinations <ArrowRight className="h-4 w-4" />
+        </Link>
+      </motion.div>
+    </section>
+  );
+}
+
 /* ─── Page ────────────────────────────────────────────────────── */
 function GlobePage() {
   const globeRef  = useRef<any>(null);
@@ -321,6 +482,17 @@ function GlobePage() {
   const [hovered, setHovered]   = useState<Marker | null>(null);
   const [selected, setSelected] = useState<Marker | null>(null);
   const [size, setSize] = useState({ w: 900, h: 900 });
+  const [atTop, setAtTop] = useState(true);
+
+  /* Scroll-linked globe fade: globe is fixed; as the user scrolls into the
+     info page it gently fades and scales up, revealing the destinations. */
+  const { scrollY } = useScroll();
+  const globeOpacity = useTransform(scrollY, [0, 600], [1, 0]);
+  const globeScale   = useTransform(scrollY, [0, 600], [1, 1.18]);
+  useMotionValueEvent(scrollY, "change", (y) => {
+    const top = y < (typeof window !== "undefined" ? window.innerHeight * 0.55 : 400);
+    setAtTop((prev) => (prev !== top ? top : prev));
+  });
 
   /* Dynamic import */
   useEffect(() => {
@@ -391,11 +563,15 @@ function GlobePage() {
   }, [handleSelect]);
 
   return (
-    <main className="relative flex min-h-screen flex-col overflow-hidden bg-[oklch(0.07_0.03_245)]">
+    <main className="relative overflow-x-hidden bg-[oklch(0.07_0.03_245)]">
       <StarField />
 
-      {/* ── Fullscreen globe ── */}
-      <div ref={containerRef} className="fixed inset-0 z-0" style={{ top: 0 }}>
+      {/* ── Fixed globe (fades & scales as you scroll into the info page) ── */}
+      <motion.div
+        ref={containerRef}
+        className="fixed inset-0 z-0"
+        style={{ top: 0, opacity: globeOpacity, scale: globeScale, pointerEvents: atTop ? "auto" : "none" }}
+      >
         {!GlobeGL && (
           <div className="flex h-full items-center justify-center">
             <div className="flex flex-col items-center gap-5">
@@ -469,10 +645,10 @@ function GlobePage() {
             />
           </motion.div>
         )}
-      </div>
+      </motion.div>
 
-      {/* ── UI overlay (above globe) ── */}
-      <div className="relative z-10 flex flex-col items-center pointer-events-none" style={{ minHeight: "100svh" }}>
+      {/* ── Hero overlay (first screen, above globe) ── */}
+      <div className="relative z-10 flex h-screen flex-col items-center pointer-events-none">
 
         {/* Top bar */}
         <div className="pointer-events-auto w-full px-4 pt-24 flex flex-col items-center gap-4">
@@ -521,7 +697,7 @@ function GlobePage() {
         {/* Hover tooltip — bottom center */}
         <div className="pointer-events-none mb-36 flex items-end justify-center px-4">
           <AnimatePresence>
-            {hovered && hovered.id !== selected?.id && (
+            {atTop && hovered && hovered.id !== selected?.id && (
               <motion.div
                 key={hovered.id}
                 initial={{ opacity: 0, y: 14, scale: 0.94 }}
@@ -546,21 +722,21 @@ function GlobePage() {
         {/* Detail card — fixed bottom-right on desktop, bottom-center on mobile */}
         <div className="pointer-events-auto fixed bottom-8 right-6 z-30 w-[min(100vw-3rem,22rem)] lg:bottom-10 lg:right-10">
           <AnimatePresence>
-            {selected && (
+            {selected && atTop && (
               <DetailCard marker={selected} onClose={handleClose} />
             )}
           </AnimatePresence>
         </div>
 
-        {/* Country pill bar — bottom, horizontally scrollable; hides when a country is open */}
+        {/* Country pill bar — bottom, horizontally scrollable; hides on select / scroll */}
         <AnimatePresence>
-          {!selected && (
+          {!selected && atTop && (
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 24 }}
               transition={{ delay: 0.4, duration: 0.7 }}
-              className="pointer-events-auto fixed inset-x-0 bottom-6 z-30 flex justify-center px-4"
+              className="pointer-events-auto fixed inset-x-0 bottom-16 z-30 flex justify-center px-4"
             >
               <div
                 className="flex max-w-full gap-2 overflow-x-auto rounded-full border border-white/10 bg-black/40 p-1.5 backdrop-blur-xl"
@@ -584,7 +760,29 @@ function GlobePage() {
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Scroll-down cue */}
+        <AnimatePresence>
+          {atTop && !selected && (
+            <motion.button
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ delay: 1.4 }}
+              onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
+              className="pointer-events-auto fixed inset-x-0 bottom-4 z-30 mx-auto flex w-max flex-col items-center gap-0.5 text-[10px] uppercase tracking-[0.3em] text-white/45 transition-colors hover:text-sky-300"
+            >
+              Scroll to explore
+              <motion.span animate={{ y: [0, 5, 0] }} transition={{ duration: 1.6, repeat: Infinity }}>
+                <ChevronDown className="h-4 w-4" />
+              </motion.span>
+            </motion.button>
+          )}
+        </AnimatePresence>
       </div>
+
+      {/* ── Info page (revealed on scroll) ── */}
+      <InfoSection />
     </main>
   );
 }
