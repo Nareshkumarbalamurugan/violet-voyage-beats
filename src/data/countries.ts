@@ -88,10 +88,12 @@ const f = (food: FoodInput): Food => ({
   image: img(food.query ?? food.name, "food"),
 });
 
-type AttrInput = Omit<Attraction, "image"> & { query?: string };
+type AttrInput = Omit<Attraction, "image"> & { query?: string; unsplashId?: string };
 const a = (attr: AttrInput): Attraction => ({
   ...attr,
-  image: img(attr.query ?? attr.name, "landmark"),
+  image: attr.unsplashId
+    ? unsplash(attr.unsplashId)
+    : img(attr.query ?? attr.name, "landmark"),
 });
 
 /* Curated, stable Unsplash photo for countries without a bundled asset */
@@ -181,10 +183,10 @@ export const countries: Country[] = [
       { genre: "Matsuri Taiko", mood: "Festival thunder", type: "Festival", artists: ["Kodo"] },
     ],
     attractions: [
-      a({ name: "Fushimi Inari Shrine", category: "Historical", description: "Thousands of vermilion torii gates winding up a sacred mountain.", location: "Kyoto", ticket: "Free", hours: "24 hours", bestTime: "Early morning", tip: "Hike past the first gates to escape crowds.", unesco: false, query: "torii gate kyoto" }),
-      a({ name: "Mount Fuji", category: "Nature", description: "Japan's iconic snow-capped sacred volcano and climbing pilgrimage.", location: "Honshu", ticket: "Free (climb permit in season)", hours: "Climbing Jul–Sep", bestTime: "Sunrise (Goraiko)", tip: "View it clearly from Lake Kawaguchiko.", unesco: true, query: "mount fuji" }),
-      a({ name: "Shibuya Crossing", category: "Nightlife", description: "The world's busiest pedestrian scramble under a wall of neon.", location: "Tokyo", ticket: "Free", hours: "24 hours", bestTime: "After dark", tip: "Watch from the Shibuya Sky deck.", query: "shibuya crossing" }),
-      a({ name: "Arashiyama Bamboo Grove", category: "Hidden Gem", description: "A towering green corridor of swaying bamboo.", location: "Kyoto", ticket: "Free", hours: "24 hours", bestTime: "Sunrise", tip: "Combine with nearby Tenryu-ji temple.", query: "bamboo forest japan" }),
+      a({ name: "Fushimi Inari Shrine", category: "Historical", description: "Thousands of vermilion torii gates winding up a sacred mountain.", location: "Kyoto", ticket: "Free", hours: "24 hours", bestTime: "Early morning", tip: "Hike past the first gates to escape crowds.", unesco: false, unsplashId: "1528360983277-13d401cdc186" }),
+      a({ name: "Mount Fuji", category: "Nature", description: "Japan's iconic snow-capped sacred volcano and climbing pilgrimage.", location: "Honshu", ticket: "Free (climb permit in season)", hours: "Climbing Jul–Sep", bestTime: "Sunrise (Goraiko)", tip: "View it clearly from Lake Kawaguchiko.", unesco: true, unsplashId: "1578469645742-4a703abbf5ee" }),
+      a({ name: "Shibuya Crossing", category: "Nightlife", description: "The world's busiest pedestrian scramble under a wall of neon.", location: "Tokyo", ticket: "Free", hours: "24 hours", bestTime: "After dark", tip: "Watch from the Shibuya Sky deck.", unsplashId: "1542051841857-5f90071e7989" }),
+      a({ name: "Arashiyama Bamboo Grove", category: "Hidden Gem", description: "A towering green corridor of swaying bamboo.", location: "Kyoto", ticket: "Free", hours: "24 hours", bestTime: "Sunrise", tip: "Combine with nearby Tenryu-ji temple.", unsplashId: "1524413840807-0c3cb6fa342d" }),
     ],
     culture: {
       festivals: ["Hanami (Cherry Blossom)", "Gion Matsuri", "Tanabata"],
@@ -281,10 +283,10 @@ export const countries: Country[] = [
       { genre: "French House", mood: "Electric Paris nights", type: "Modern", artists: ["Daft Punk", "Justice"] },
     ],
     attractions: [
-      a({ name: "Eiffel Tower", category: "Historical", description: "The iron lattice icon that defines the Paris skyline.", location: "Paris", ticket: "€18–29", hours: "9:30–23:45", bestTime: "Sunset & sparkle hour", tip: "Book summit tickets weeks ahead.", query: "eiffel tower" }),
-      a({ name: "Louvre Museum", category: "Historical", description: "The world's largest art museum, home to the Mona Lisa.", location: "Paris", ticket: "€22", hours: "9:00–18:00 (closed Tue)", bestTime: "Wednesday evening", tip: "Enter via Carrousel to skip pyramid queues.", unesco: true, query: "louvre museum" }),
-      a({ name: "Côte d'Azur Beaches", category: "Beaches", description: "Glittering Mediterranean coves from Nice to Cannes.", location: "French Riviera", ticket: "Free (public)", hours: "Daylight", bestTime: "June", tip: "Visit Villefranche-sur-Mer for calm water.", query: "french riviera beach" }),
-      a({ name: "Mont Saint-Michel", category: "UNESCO", description: "A medieval abbey rising from tidal flats like a mirage.", location: "Normandy", ticket: "€11 (abbey)", hours: "9:00–19:00", bestTime: "High tide", tip: "Stay overnight after day-trippers leave.", unesco: true, query: "mont saint michel" }),
+      a({ name: "Eiffel Tower", category: "Historical", description: "The iron lattice icon that defines the Paris skyline.", location: "Paris", ticket: "€18–29", hours: "9:30–23:45", bestTime: "Sunset & sparkle hour", tip: "Book summit tickets weeks ahead.", unsplashId: "1499856871958-5b9627545d1a" }),
+      a({ name: "Louvre Museum", category: "Historical", description: "The world's largest art museum, home to the Mona Lisa.", location: "Paris", ticket: "€22", hours: "9:00–18:00 (closed Tue)", bestTime: "Wednesday evening", tip: "Enter via Carrousel to skip pyramid queues.", unesco: true, unsplashId: "1565799557187-b4a1d33d1afb" }),
+      a({ name: "Côte d'Azur Beaches", category: "Beaches", description: "Glittering Mediterranean coves from Nice to Cannes.", location: "French Riviera", ticket: "Free (public)", hours: "Daylight", bestTime: "June", tip: "Visit Villefranche-sur-Mer for calm water.", unsplashId: "1507525428034-b723cf961d3e" }),
+      a({ name: "Mont Saint-Michel", category: "UNESCO", description: "A medieval abbey rising from tidal flats like a mirage.", location: "Normandy", ticket: "€11 (abbey)", hours: "9:00–19:00", bestTime: "High tide", tip: "Stay overnight after day-trippers leave.", unesco: true, unsplashId: "1539635278303-d4002c07b9a6" }),
     ],
     culture: {
       festivals: ["Bastille Day", "Fête de la Musique", "Cannes Film Festival"],
@@ -385,10 +387,10 @@ export const countries: Country[] = [
       { genre: "Canzone Napoletana", mood: "Mandolin romance", type: "Regional", artists: ["Roberto Murolo"] },
     ],
     attractions: [
-      a({ name: "Colosseum", category: "Historical", description: "The mighty Roman amphitheatre that once held 50,000 spectators.", location: "Rome", ticket: "€18", hours: "9:00–19:00", bestTime: "Early morning", tip: "Combo ticket includes the Forum.", unesco: true, query: "colosseum rome" }),
-      a({ name: "Venice Canals", category: "Hidden Gem", description: "A floating city of bridges, gondolas, and faded palazzi.", location: "Venice", ticket: "Gondola ~€80", hours: "24 hours", bestTime: "Dawn", tip: "Get lost away from San Marco for magic.", unesco: true, query: "venice canal" }),
-      a({ name: "Amalfi Coast", category: "Beaches", description: "Pastel cliff-side villages above a turquoise sea.", location: "Campania", ticket: "Free", hours: "Daylight", bestTime: "May", tip: "Take the SITA bus, not a car.", query: "amalfi coast" }),
-      a({ name: "Florence Duomo", category: "Historical", description: "Brunelleschi's terracotta dome crowning Renaissance Florence.", location: "Florence", ticket: "€30 (dome climb)", hours: "10:15–16:00", bestTime: "Opening", tip: "Book the dome climb online days ahead.", unesco: true, query: "florence duomo" }),
+      a({ name: "Colosseum", category: "Historical", description: "The mighty Roman amphitheatre that once held 50,000 spectators.", location: "Rome", ticket: "€18", hours: "9:00–19:00", bestTime: "Early morning", tip: "Combo ticket includes the Forum.", unesco: true, unsplashId: "1555992336-03a23c4b178c" }),
+      a({ name: "Venice Canals", category: "Hidden Gem", description: "A floating city of bridges, gondolas, and faded palazzi.", location: "Venice", ticket: "Gondola ~€80", hours: "24 hours", bestTime: "Dawn", tip: "Get lost away from San Marco for magic.", unesco: true, unsplashId: "1514890547357-a9ee288728f0" }),
+      a({ name: "Amalfi Coast", category: "Beaches", description: "Pastel cliff-side villages above a turquoise sea.", location: "Campania", ticket: "Free", hours: "Daylight", bestTime: "May", tip: "Take the SITA bus, not a car.", unsplashId: "1534430480872-58d3b1b76da2" }),
+      a({ name: "Florence Duomo", category: "Historical", description: "Brunelleschi's terracotta dome crowning Renaissance Florence.", location: "Florence", ticket: "€30 (dome climb)", hours: "10:15–16:00", bestTime: "Opening", tip: "Book the dome climb online days ahead.", unesco: true, unsplashId: "1543429258-1b0a6aabb75c" }),
     ],
     culture: {
       festivals: ["Carnevale di Venezia", "Palio di Siena", "Ferragosto"],
@@ -486,10 +488,10 @@ export const countries: Country[] = [
       { genre: "Trot", mood: "Retro festival joy", type: "Festival", artists: ["Lim Young-woong"] },
     ],
     attractions: [
-      a({ name: "Gyeongbokgung Palace", category: "Historical", description: "Joseon-era royal palace with a ceremonial guard-changing.", location: "Seoul", ticket: "₩3,000", hours: "9:00–18:00 (closed Tue)", bestTime: "Guard change 10am", tip: "Wear hanbok for free entry.", query: "gyeongbokgung palace" }),
-      a({ name: "Bukchon Hanok Village", category: "Hidden Gem", description: "Lanes of traditional tile-roofed hanok houses.", location: "Seoul", ticket: "Free", hours: "Daylight (quiet hours)", bestTime: "Early morning", tip: "Be respectful — residents live here.", query: "bukchon hanok village" }),
-      a({ name: "Jeju Island", category: "Nature", description: "Volcanic island of waterfalls, craters, and lava tubes.", location: "Jeju", ticket: "Varies", hours: "Daylight", bestTime: "Spring/Autumn", tip: "Hike Hallasan for sunrise.", unesco: true, query: "jeju island" }),
-      a({ name: "Haeundae Beach", category: "Beaches", description: "Busan's lively crescent of sand backed by skyscrapers.", location: "Busan", ticket: "Free", hours: "24 hours", bestTime: "Summer evenings", tip: "Pair with nearby Gamcheon Culture Village.", query: "haeundae beach busan" }),
+      a({ name: "Gyeongbokgung Palace", category: "Historical", description: "Joseon-era royal palace with a ceremonial guard-changing.", location: "Seoul", ticket: "₩3,000", hours: "9:00–18:00 (closed Tue)", bestTime: "Guard change 10am", tip: "Wear hanbok for free entry.", unsplashId: "1601042879364-f3947d3f9c16" }),
+      a({ name: "Bukchon Hanok Village", category: "Hidden Gem", description: "Lanes of traditional tile-roofed hanok houses.", location: "Seoul", ticket: "Free", hours: "Daylight (quiet hours)", bestTime: "Early morning", tip: "Be respectful — residents live here.", unsplashId: "1548115184-bc6544d06a58" }),
+      a({ name: "Jeju Island", category: "Nature", description: "Volcanic island of waterfalls, craters, and lava tubes.", location: "Jeju", ticket: "Varies", hours: "Daylight", bestTime: "Spring/Autumn", tip: "Hike Hallasan for sunrise.", unesco: true, unsplashId: "1561036782-5d25fa93b0fd" }),
+      a({ name: "Haeundae Beach", category: "Beaches", description: "Busan's lively crescent of sand backed by skyscrapers.", location: "Busan", ticket: "Free", hours: "24 hours", bestTime: "Summer evenings", tip: "Pair with nearby Gamcheon Culture Village.", unsplashId: "1517154421773-0855b62a8a50" }),
     ],
     culture: {
       festivals: ["Seollal (Lunar New Year)", "Chuseok", "Boryeong Mud Festival"],
@@ -588,10 +590,10 @@ export const countries: Country[] = [
       { genre: "Forró", mood: "Northeastern dance", type: "Regional", artists: ["Luiz Gonzaga"] },
     ],
     attractions: [
-      a({ name: "Christ the Redeemer", category: "Historical", description: "The 38m Art Deco statue watching over Rio from Corcovado.", location: "Rio de Janeiro", ticket: "R$87", hours: "8:00–19:00", bestTime: "Sunrise (clear skies)", tip: "Take the cog train through Tijuca forest.", unesco: false, query: "christ the redeemer" }),
-      a({ name: "Sugarloaf Mountain", category: "Nature", description: "Cable-car peaks above Guanabara Bay at golden hour.", location: "Rio de Janeiro", ticket: "R$160", hours: "8:00–21:00", bestTime: "Sunset", tip: "Buy tickets online to skip lines.", query: "sugarloaf mountain rio" }),
-      a({ name: "Iguaçu Falls", category: "Nature", description: "275 thundering cascades straddling the Argentine border.", location: "Paraná", ticket: "R$100", hours: "9:00–17:00", bestTime: "Morning", tip: "Bring a poncho for the Devil's Throat.", unesco: true, query: "iguazu falls" }),
-      a({ name: "Copacabana Beach", category: "Beaches", description: "4km of golden sand, beach football, and caipirinhas.", location: "Rio de Janeiro", ticket: "Free", hours: "24 hours", bestTime: "Late afternoon", tip: "Watch your belongings; travel light.", query: "copacabana beach" }),
+      a({ name: "Christ the Redeemer", category: "Historical", description: "The 38m Art Deco statue watching over Rio from Corcovado.", location: "Rio de Janeiro", ticket: "R$87", hours: "8:00–19:00", bestTime: "Sunrise (clear skies)", tip: "Take the cog train through Tijuca forest.", unesco: false, unsplashId: "1594131636090-a8a0edf5e1d4" }),
+      a({ name: "Sugarloaf Mountain", category: "Nature", description: "Cable-car peaks above Guanabara Bay at golden hour.", location: "Rio de Janeiro", ticket: "R$160", hours: "8:00–21:00", bestTime: "Sunset", tip: "Buy tickets online to skip lines.", unsplashId: "1494783367685-3b5a6b33d43b" }),
+      a({ name: "Iguaçu Falls", category: "Nature", description: "275 thundering cascades straddling the Argentine border.", location: "Paraná", ticket: "R$100", hours: "9:00–17:00", bestTime: "Morning", tip: "Bring a poncho for the Devil's Throat.", unesco: true, unsplashId: "1551632811-561732d1e306" }),
+      a({ name: "Copacabana Beach", category: "Beaches", description: "4km of golden sand, beach football, and caipirinhas.", location: "Rio de Janeiro", ticket: "Free", hours: "24 hours", bestTime: "Late afternoon", tip: "Watch your belongings; travel light.", unsplashId: "1559590056-28372a1ae0c5" }),
     ],
     culture: {
       festivals: ["Carnival (Carnaval)", "Festa Junina", "Réveillon (New Year)"],
@@ -636,9 +638,9 @@ export const countries: Country[] = [
       { genre: "Bhangra", mood: "Punjabi festival energy", type: "Festival", artists: ["Daler Mehndi"] },
     ],
     attractions: [
-      a({ name: "Taj Mahal", category: "Historical", description: "An ivory-white marble mausoleum of eternal love, glowing at dawn.", location: "Agra", ticket: "₹1100 (foreigners)", hours: "Sunrise–sunset (closed Fri)", bestTime: "Sunrise", tip: "Enter from the east gate to beat queues.", unesco: true, query: "taj mahal" }),
-      a({ name: "Amber Fort", category: "Historical", description: "A honey-hued hilltop fortress of mirrored halls above Jaipur.", location: "Jaipur", ticket: "₹500", hours: "8am–6pm", bestTime: "Morning", tip: "Catch the evening light & sound show.", query: "amber fort jaipur" }),
-      a({ name: "Varanasi Ghats", category: "Hidden Gem", description: "Ancient riverfront steps where dawn aartis meet the sacred Ganges.", location: "Varanasi", ticket: "Free", hours: "24 hours", bestTime: "Sunrise boat ride", tip: "Witness the evening Ganga Aarti.", query: "varanasi ghats ganges" }),
+      a({ name: "Taj Mahal", category: "Historical", description: "An ivory-white marble mausoleum of eternal love, glowing at dawn.", location: "Agra", ticket: "₹1100 (foreigners)", hours: "Sunrise–sunset (closed Fri)", bestTime: "Sunrise", tip: "Enter from the east gate to beat queues.", unesco: true, unsplashId: "1524492412935-b57e5f6f7a55" }),
+      a({ name: "Amber Fort", category: "Historical", description: "A honey-hued hilltop fortress of mirrored halls above Jaipur.", location: "Jaipur", ticket: "₹500", hours: "8am–6pm", bestTime: "Morning", tip: "Catch the evening light & sound show.", unsplashId: "1524230572479-dc85daf2f9e4" }),
+      a({ name: "Varanasi Ghats", category: "Hidden Gem", description: "Ancient riverfront steps where dawn aartis meet the sacred Ganges.", location: "Varanasi", ticket: "Free", hours: "24 hours", bestTime: "Sunrise boat ride", tip: "Witness the evening Ganga Aarti.", unsplashId: "1561361513-2d000a50f0dc" }),
     ],
     culture: {
       festivals: ["Diwali (Festival of Lights)", "Holi (Colors)", "Durga Puja"],
@@ -683,9 +685,9 @@ export const countries: Country[] = [
       { genre: "Mor Lam", mood: "Hypnotic Isan groove", type: "Regional", artists: ["Rasmee"] },
     ],
     attractions: [
-      a({ name: "Grand Palace & Wat Phra Kaew", category: "Historical", description: "A dazzling royal complex housing the revered Emerald Buddha.", location: "Bangkok", ticket: "฿500", hours: "8:30am–3:30pm", bestTime: "Early morning", tip: "Cover shoulders and knees to enter.", query: "grand palace bangkok" }),
-      a({ name: "Phi Phi Islands", category: "Beaches", description: "Limestone cliffs plunging into electric-blue lagoons.", location: "Krabi", ticket: "Boat tours ฿1000+", hours: "Day trips", bestTime: "Nov–Apr", tip: "Go early to beat the crowds at Maya Bay.", query: "phi phi islands thailand" }),
-      a({ name: "Doi Suthep Temple", category: "Historical", description: "A golden mountaintop temple overlooking Chiang Mai.", location: "Chiang Mai", ticket: "฿30", hours: "6am–6pm", bestTime: "Sunset", tip: "Climb the 309-step naga staircase.", query: "doi suthep temple" }),
+      a({ name: "Grand Palace & Wat Phra Kaew", category: "Historical", description: "A dazzling royal complex housing the revered Emerald Buddha.", location: "Bangkok", ticket: "฿500", hours: "8:30am–3:30pm", bestTime: "Early morning", tip: "Cover shoulders and knees to enter.", unsplashId: "1547981609-4b6bfe67ca0b" }),
+      a({ name: "Phi Phi Islands", category: "Beaches", description: "Limestone cliffs plunging into electric-blue lagoons.", location: "Krabi", ticket: "Boat tours ฿1000+", hours: "Day trips", bestTime: "Nov–Apr", tip: "Go early to beat the crowds at Maya Bay.", unsplashId: "1519046904884-53103b34b206" }),
+      a({ name: "Doi Suthep Temple", category: "Historical", description: "A golden mountaintop temple overlooking Chiang Mai.", location: "Chiang Mai", ticket: "฿30", hours: "6am–6pm", bestTime: "Sunset", tip: "Climb the 309-step naga staircase.", unsplashId: "1528681183-6ae78d6b6f7f" }),
     ],
     culture: {
       festivals: ["Songkran (Water Festival)", "Loi Krathong (Lights)", "Yi Peng Lantern"],
@@ -730,9 +732,9 @@ export const countries: Country[] = [
       { genre: "Rumba Catalana", mood: "Street-party rhythm", type: "Regional", artists: ["Gipsy Kings"] },
     ],
     attractions: [
-      a({ name: "Sagrada Família", category: "Historical", description: "Gaudí's unfinished basilica where stone melts into forest-like columns and stained-glass light.", location: "Barcelona", ticket: "€26", hours: "9am–6pm", bestTime: "Morning light", tip: "Book timed tickets weeks ahead.", unesco: true, query: "sagrada familia" }),
-      a({ name: "Alhambra", category: "Historical", description: "A Moorish palace-fortress of intricate arabesques above Granada.", location: "Granada", ticket: "€19", hours: "8:30am–8pm", bestTime: "Sunset over Albaicín", tip: "Nasrid Palaces require a timed slot.", unesco: true, query: "alhambra granada" }),
-      a({ name: "Plaza de España", category: "Hidden Gem", description: "A semicircular tiled plaza of bridges and azulejos in Seville.", location: "Seville", ticket: "Free", hours: "24 hours", bestTime: "Golden hour", tip: "Rent a rowboat on the canal.", query: "plaza de espana seville" }),
+      a({ name: "Sagrada Família", category: "Historical", description: "Gaudí's unfinished basilica where stone melts into forest-like columns and stained-glass light.", location: "Barcelona", ticket: "€26", hours: "9am–6pm", bestTime: "Morning light", tip: "Book timed tickets weeks ahead.", unesco: true, unsplashId: "1539037116277-45d9d5de60af" }),
+      a({ name: "Alhambra", category: "Historical", description: "A Moorish palace-fortress of intricate arabesques above Granada.", location: "Granada", ticket: "€19", hours: "8:30am–8pm", bestTime: "Sunset over Albaicín", tip: "Nasrid Palaces require a timed slot.", unesco: true, unsplashId: "1519098635131-4a5b1d651c0e" }),
+      a({ name: "Plaza de España", category: "Hidden Gem", description: "A semicircular tiled plaza of bridges and azulejos in Seville.", location: "Seville", ticket: "Free", hours: "24 hours", bestTime: "Golden hour", tip: "Rent a rowboat on the canal.", unsplashId: "1509909756405-be0199881695" }),
     ],
     culture: {
       festivals: ["La Tomatina", "Running of the Bulls (San Fermín)", "Feria de Abril"],
@@ -777,9 +779,9 @@ export const countries: Country[] = [
       { genre: "Shaabi", mood: "Working-class festivity", type: "Regional", artists: ["Ahmed Adaweya"] },
     ],
     attractions: [
-      a({ name: "Pyramids of Giza", category: "Historical", description: "The last surviving Ancient Wonder — three colossal tombs guarded by the Sphinx.", location: "Giza", ticket: "EGP 540", hours: "7am–5pm", bestTime: "Early morning", tip: "Ride a camel out for the classic panorama.", unesco: true, query: "pyramids of giza" }),
-      a({ name: "Karnak Temple", category: "Historical", description: "A vast hall of 134 towering carved columns built across 2,000 years.", location: "Luxor", ticket: "EGP 450", hours: "6am–5:30pm", bestTime: "Late afternoon", tip: "Return for the evening sound & light show.", unesco: true, query: "karnak temple luxor" }),
-      a({ name: "Nile Felucca Sail", category: "Nature", description: "Drift past palm-fringed banks on a traditional white-sailed boat at sunset.", location: "Aswan", ticket: "~EGP 300/hr", hours: "Daylight", bestTime: "Sunset", tip: "Negotiate the price before boarding.", query: "felucca nile aswan" }),
+      a({ name: "Pyramids of Giza", category: "Historical", description: "The last surviving Ancient Wonder — three colossal tombs guarded by the Sphinx.", location: "Giza", ticket: "EGP 540", hours: "7am–5pm", bestTime: "Early morning", tip: "Ride a camel out for the classic panorama.", unesco: true, unsplashId: "1539650116574-75c0c6d35e67" }),
+      a({ name: "Karnak Temple", category: "Historical", description: "A vast hall of 134 towering carved columns built across 2,000 years.", location: "Luxor", ticket: "EGP 450", hours: "6am–5:30pm", bestTime: "Late afternoon", tip: "Return for the evening sound & light show.", unesco: true, unsplashId: "1553913861-c0fddf2619ee" }),
+      a({ name: "Nile Felucca Sail", category: "Nature", description: "Drift past palm-fringed banks on a traditional white-sailed boat at sunset.", location: "Aswan", ticket: "~EGP 300/hr", hours: "Daylight", bestTime: "Sunset", tip: "Negotiate the price before boarding.", unsplashId: "1553061613-0cebca5ea9e8" }),
     ],
     culture: {
       festivals: ["Ramadan & Eid", "Abu Simbel Sun Festival", "Sham El-Nessim (Spring)"],
@@ -824,9 +826,9 @@ export const countries: Country[] = [
       { genre: "Son Jarocho", mood: "Veracruz string fiesta", type: "Regional", artists: ["Los Cojolites"] },
     ],
     attractions: [
-      a({ name: "Chichén Itzá", category: "Historical", description: "The colossal Maya pyramid of Kukulcán where equinox light forms a descending serpent.", location: "Yucatán", ticket: "MXN 614", hours: "8am–5pm", bestTime: "Early morning", tip: "Visit at the equinox for the serpent shadow.", unesco: true, query: "chichen itza" }),
-      a({ name: "Teotihuacán", category: "Historical", description: "Avenue of the Dead flanked by the towering Pyramids of the Sun and Moon.", location: "near Mexico City", ticket: "MXN 90", hours: "9am–5pm", bestTime: "Sunrise balloon ride", tip: "Float over the pyramids in a hot-air balloon.", unesco: true, query: "teotihuacan pyramid" }),
-      a({ name: "Cenotes of Yucatán", category: "Nature", description: "Crystalline freshwater sinkholes once sacred to the Maya.", location: "Yucatán", ticket: "~MXN 200", hours: "9am–5pm", bestTime: "Midday light beams", tip: "Bring biodegradable sunscreen only.", query: "cenote yucatan" }),
+      a({ name: "Chichén Itzá", category: "Historical", description: "The colossal Maya pyramid of Kukulcán where equinox light forms a descending serpent.", location: "Yucatán", ticket: "MXN 614", hours: "8am–5pm", bestTime: "Early morning", tip: "Visit at the equinox for the serpent shadow.", unesco: true, unsplashId: "1574790399814-a1d9b80fef6c" }),
+      a({ name: "Teotihuacán", category: "Historical", description: "Avenue of the Dead flanked by the towering Pyramids of the Sun and Moon.", location: "near Mexico City", ticket: "MXN 90", hours: "9am–5pm", bestTime: "Sunrise balloon ride", tip: "Float over the pyramids in a hot-air balloon.", unesco: true, unsplashId: "1615484477778-be9e6b8dfb41" }),
+      a({ name: "Cenotes of Yucatán", category: "Nature", description: "Crystalline freshwater sinkholes once sacred to the Maya.", location: "Yucatán", ticket: "~MXN 200", hours: "9am–5pm", bestTime: "Midday light beams", tip: "Bring biodegradable sunscreen only.", unsplashId: "1548019983-e13b10ab0e01" }),
     ],
     culture: {
       festivals: ["Día de los Muertos", "Guelaguetza", "Cinco de Mayo"],
@@ -871,9 +873,9 @@ export const countries: Country[] = [
       { genre: "Nisiotika", mood: "Breezy island songs", type: "Regional", artists: ["Konitopoulos family"] },
     ],
     attractions: [
-      a({ name: "Acropolis & Parthenon", category: "Historical", description: "The marble temple of Athena crowning Athens for 2,500 years.", location: "Athens", ticket: "€20", hours: "8am–8pm", bestTime: "Opening hour", tip: "Combo ticket covers nearby ancient sites.", unesco: true, query: "acropolis parthenon" }),
-      a({ name: "Oia, Santorini", category: "Beaches", description: "Cliffside blue-domed village above a flooded volcanic caldera.", location: "Santorini", ticket: "Free", hours: "24 hours", bestTime: "Sunset", tip: "Arrive early to claim a sunset spot.", query: "oia santorini sunset" }),
-      a({ name: "Meteora Monasteries", category: "Hidden Gem", description: "Byzantine monasteries perched atop sheer rock pinnacles.", location: "Thessaly", ticket: "€3 each", hours: "9am–4pm", bestTime: "Morning mist", tip: "Dress modestly to enter the monasteries.", unesco: true, query: "meteora monastery greece" }),
+      a({ name: "Acropolis & Parthenon", category: "Historical", description: "The marble temple of Athena crowning Athens for 2,500 years.", location: "Athens", ticket: "€20", hours: "8am–8pm", bestTime: "Opening hour", tip: "Combo ticket covers nearby ancient sites.", unesco: true, unsplashId: "1555993539-1732b0258235" }),
+      a({ name: "Oia, Santorini", category: "Beaches", description: "Cliffside blue-domed village above a flooded volcanic caldera.", location: "Santorini", ticket: "Free", hours: "24 hours", bestTime: "Sunset", tip: "Arrive early to claim a sunset spot.", unsplashId: "1533105079780-92b9be482077" }),
+      a({ name: "Meteora Monasteries", category: "Hidden Gem", description: "Byzantine monasteries perched atop sheer rock pinnacles.", location: "Thessaly", ticket: "€3 each", hours: "9am–4pm", bestTime: "Morning mist", tip: "Dress modestly to enter the monasteries.", unesco: true, unsplashId: "1598970605064-6cbf42fa2769" }),
     ],
     culture: {
       festivals: ["Greek Orthodox Easter", "Apokries (Carnival)", "Athens Epidaurus Festival"],
@@ -918,9 +920,9 @@ export const countries: Country[] = [
       { genre: "Indie Pop", mood: "Sun-drenched & dreamy", type: "Modern", artists: ["Tame Impala", "Courtney Barnett"] },
     ],
     attractions: [
-      a({ name: "Sydney Opera House", category: "Historical", description: "The sail-shelled masterpiece sweeping over Sydney Harbour.", location: "Sydney", ticket: "Tours from AUD 43", hours: "9am–5pm tours", bestTime: "Sunset harbour cruise", tip: "Catch a performance inside the concert hall.", unesco: true, query: "sydney opera house" }),
-      a({ name: "Great Barrier Reef", category: "Nature", description: "The planet's largest living structure — 2,300km of coral and marine life.", location: "Queensland", ticket: "Tours from AUD 200", hours: "Day trips", bestTime: "Jun–Oct (clear water)", tip: "Choose eco-certified reef operators.", unesco: true, query: "great barrier reef" }),
-      a({ name: "Uluru", category: "Nature", description: "A vast sacred sandstone monolith glowing red at dawn in the Red Centre.", location: "Northern Territory", ticket: "AUD 38 (3-day park)", hours: "Sunrise–sunset", bestTime: "Sunset color change", tip: "Respect Anangu wishes — don't climb.", unesco: true, query: "uluru ayers rock" }),
+      a({ name: "Sydney Opera House", category: "Historical", description: "The sail-shelled masterpiece sweeping over Sydney Harbour.", location: "Sydney", ticket: "Tours from AUD 43", hours: "9am–5pm tours", bestTime: "Sunset harbour cruise", tip: "Catch a performance inside the concert hall.", unesco: true, unsplashId: "1549180030-48bf079b2fc4" }),
+      a({ name: "Great Barrier Reef", category: "Nature", description: "The planet's largest living structure — 2,300km of coral and marine life.", location: "Queensland", ticket: "Tours from AUD 200", hours: "Day trips", bestTime: "Jun–Oct (clear water)", tip: "Choose eco-certified reef operators.", unesco: true, unsplashId: "1559827291-72ebcd50c07a" }),
+      a({ name: "Uluru", category: "Nature", description: "A vast sacred sandstone monolith glowing red at dawn in the Red Centre.", location: "Northern Territory", ticket: "AUD 38 (3-day park)", hours: "Sunrise–sunset", bestTime: "Sunset color change", tip: "Respect Anangu wishes — don't climb.", unesco: true, unsplashId: "1551867052-72a60b1a53e7" }),
     ],
     culture: {
       festivals: ["Vivid Sydney", "Melbourne Cup", "NAIDOC Week"],
@@ -965,9 +967,9 @@ export const countries: Country[] = [
       { genre: "Andalusian Classical", mood: "Refined courtly suites", type: "Traditional", artists: ["Orchestra of Fez"] },
     ],
     attractions: [
-      a({ name: "Jemaa el-Fnaa", category: "Nightlife", description: "Marrakech's legendary square of snake charmers, storytellers and sizzling food stalls.", location: "Marrakech", ticket: "Free", hours: "24 hours", bestTime: "After sunset", tip: "Agree prices before eating or watching.", unesco: true, query: "jemaa el fnaa marrakech" }),
-      a({ name: "Chefchaouen Blue City", category: "Hidden Gem", description: "A mountain town washed in a thousand shades of blue.", location: "Rif Mountains", ticket: "Free", hours: "24 hours", bestTime: "Morning light", tip: "Wander the back alleys for the best blues.", query: "chefchaouen blue city" }),
-      a({ name: "Sahara at Merzouga", category: "Nature", description: "Towering golden dunes of Erg Chebbi crossed by camel caravan.", location: "Merzouga", ticket: "Tours from MAD 800", hours: "Overnight camps", bestTime: "Sunrise on the dunes", tip: "Stay overnight in a desert camp.", query: "sahara desert merzouga" }),
+      a({ name: "Jemaa el-Fnaa", category: "Nightlife", description: "Marrakech's legendary square of snake charmers, storytellers and sizzling food stalls.", location: "Marrakech", ticket: "Free", hours: "24 hours", bestTime: "After sunset", tip: "Agree prices before eating or watching.", unesco: true, unsplashId: "1489493512597-d2e9d81ac5c3" }),
+      a({ name: "Chefchaouen Blue City", category: "Hidden Gem", description: "A mountain town washed in a thousand shades of blue.", location: "Rif Mountains", ticket: "Free", hours: "24 hours", bestTime: "Morning light", tip: "Wander the back alleys for the best blues.", unsplashId: "1548013867-cdb8ae98f6b2" }),
+      a({ name: "Sahara at Merzouga", category: "Nature", description: "Towering golden dunes of Erg Chebbi crossed by camel caravan.", location: "Merzouga", ticket: "Tours from MAD 800", hours: "Overnight camps", bestTime: "Sunrise on the dunes", tip: "Stay overnight in a desert camp.", unsplashId: "1519632985-6e9c8b9db3ab" }),
     ],
     culture: {
       festivals: ["Ramadan & Eid", "Fes Festival of Sacred Music", "Imilchil Marriage Festival"],
