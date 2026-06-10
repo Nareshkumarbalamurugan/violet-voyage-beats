@@ -60,7 +60,7 @@ export function CountryStory({ country, index }: { country: Country; index: numb
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-20%" }}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="text-6xl md:text-8xl font-semibold leading-[0.95]"
+            className="text-6xl md:text-8xl font-semibold leading-[0.95] text-white"
           >
             {country.name}
           </motion.h2>
@@ -127,7 +127,7 @@ export function CountryStory({ country, index }: { country: Country; index: numb
                   <Link
                     to="/country/$id/food/$foodId"
                     params={{ id: country.id, foodId: f.id }}
-                    className="block rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm transition-all hover:bg-primary/30 hover:border-primary/40 hover:scale-105"
+                    className="block rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-white/90 transition-all hover:bg-primary/30 hover:border-primary/40 hover:scale-105"
                   >
                     {f.name}
                   </Link>
