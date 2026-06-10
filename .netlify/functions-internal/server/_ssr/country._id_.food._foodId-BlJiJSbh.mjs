@@ -1,11 +1,11 @@
 import { j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
-import { N as Navbar, F as Footer } from "./Footer-BlcwNYKc.mjs";
+import { N as Navbar, F as Footer } from "./Footer-CTttrzV5.mjs";
 import { B as BackButton } from "./BackButton-BRY1BMD-.mjs";
-import { a as Route } from "./router-C8Nm53OG.mjs";
+import { a as Route } from "./router-CUbQLGxF.mjs";
 import "../_libs/sonner.mjs";
 import { m as motion } from "../_libs/framer-motion.mjs";
-import { v as Coins, U as Utensils, I as Activity, J as Flame, K as Store, M as MapPin } from "../_libs/lucide-react.mjs";
+import { Q as Coins, V as Utensils, Y as Activity, Z as Flame, _ as Store, M as MapPin } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";
 import "../_libs/tanstack__history.mjs";
 import "../_libs/cookie-es.mjs";
@@ -31,18 +31,28 @@ function FoodPage() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "relative min-h-screen bg-background text-foreground", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(Navbar, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute left-6 top-24 z-20", children: /* @__PURE__ */ jsxRuntimeExports.jsx(BackButton, {}) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "relative flex min-h-[80vh] items-end overflow-hidden", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(motion.img, { src: food.image, alt: food.name, initial: {
-        scale: 1.2
-      }, animate: {
-        scale: 1.05
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "relative flex min-h-[70vh] items-end overflow-hidden bg-background", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-aurora" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `absolute inset-0 bg-gradient-to-tr ${country.accent} opacity-60` }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { "aria-hidden": true, className: "absolute -left-32 top-10 h-[26rem] w-[26rem] rounded-full bg-primary/25 blur-[120px]", animate: {
+        scale: [1, 1.15, 1],
+        opacity: [0.5, 0.85, 0.5]
       }, transition: {
-        duration: 2,
-        ease: [0.22, 1, 0.36, 1]
-      }, className: "absolute inset-0 h-full w-full object-cover" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-b from-background/40 via-background/30 to-background" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `absolute inset-0 bg-gradient-to-tr ${country.accent} mix-blend-soft-light` }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative z-10 mx-auto w-full max-w-7xl px-6 pb-20", children: [
+        duration: 9,
+        repeat: Infinity,
+        ease: "easeInOut"
+      } }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { "aria-hidden": true, className: "absolute -right-24 bottom-0 h-[30rem] w-[30rem] rounded-full bg-accent/20 blur-[130px]", animate: {
+        scale: [1, 1.1, 1],
+        opacity: [0.4, 0.7, 0.4]
+      }, transition: {
+        duration: 11,
+        repeat: Infinity,
+        ease: "easeInOut",
+        delay: 2
+      } }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative z-10 mx-auto w-full max-w-7xl px-6 pb-20 pt-40", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.p, { initial: {
           opacity: 0,
           y: 20
@@ -51,8 +61,8 @@ function FoodPage() {
           y: 0
         }, transition: {
           duration: 0.8
-        }, className: "mb-4 text-xs uppercase tracking-[0.3em] text-gold", children: [
-          country.flag,
+        }, className: "mb-5 inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs uppercase tracking-[0.3em] text-gold", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-base leading-none", children: country.flag }),
           " ",
           country.name,
           " · Signature Flavor"
@@ -66,7 +76,7 @@ function FoodPage() {
         }, transition: {
           duration: 1,
           ease: [0.22, 1, 0.36, 1]
-        }, className: "text-6xl md:text-8xl font-semibold leading-[0.9]", children: food.name }),
+        }, className: "text-6xl md:text-8xl font-semibold leading-[0.9] text-gradient-gold", children: food.name }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(motion.p, { initial: {
           opacity: 0,
           y: 20
@@ -76,7 +86,7 @@ function FoodPage() {
         }, transition: {
           duration: 0.9,
           delay: 0.2
-        }, className: "mt-6 max-w-2xl text-2xl md:text-3xl text-gradient-violet font-display", children: food.specialty })
+        }, className: "mt-6 max-w-2xl text-2xl md:text-3xl text-foreground/85 font-display", children: food.specialty })
       ] })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "mx-auto grid w-full max-w-7xl gap-12 px-6 py-20 lg:grid-cols-[1.3fr_1fr]", children: [
@@ -110,7 +120,7 @@ function FoodPage() {
           }, transition: {
             duration: 1.1,
             ease: [0.22, 1, 0.36, 1]
-          }, className: "h-full rounded-full bg-gradient-to-r from-violet to-gold" }) })
+          }, className: "h-full rounded-full bg-gradient-to-r from-primary to-accent" }) })
         ] })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
@@ -140,7 +150,7 @@ function FoodPage() {
           id: country.id
         }, className: "group block overflow-hidden rounded-3xl", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative aspect-[4/3]", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: country.image, alt: country.name, className: "absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative z-10 flex h-full flex-col justify-end p-4", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-2xl font-semibold", children: country.name }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-gold", children: "More flavors →" })

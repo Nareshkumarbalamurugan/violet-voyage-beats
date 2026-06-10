@@ -1,8 +1,8 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { d as useNavigate, L as Link } from "../_libs/tanstack__react-router.mjs";
-import { u as useAuth } from "./router-C8Nm53OG.mjs";
+import { u as useAuth } from "./router-CUbQLGxF.mjs";
 import { m as motion, A as AnimatePresence } from "../_libs/framer-motion.mjs";
-import { N as Sun, O as Moon, q as ChevronDown, B as BookOpen, Q as Wrench, R as LogOut, X, V as Menu, Y as Send, G as Globe, Z as Instagram, _ as Twitter, $ as Youtube } from "../_libs/lucide-react.mjs";
+import { $ as Sun, a0 as Moon, o as ChevronDown, B as BookOpen, a1 as Wrench, a2 as LogOut, X, a3 as Menu, a4 as Send, G as Globe, a5 as Instagram, a6 as Twitter, a7 as Youtube } from "../_libs/lucide-react.mjs";
 function useTheme() {
   const [theme, setTheme] = reactExports.useState("dark");
   reactExports.useEffect(() => {
@@ -27,6 +27,7 @@ function useTheme() {
 }
 const navLinks = [
   { label: "Explore", to: "/explore" },
+  { label: "Globe", to: "/globe" },
   { label: "Journey", to: "/journey" },
   { label: "Tools", to: "/tools" }
 ];

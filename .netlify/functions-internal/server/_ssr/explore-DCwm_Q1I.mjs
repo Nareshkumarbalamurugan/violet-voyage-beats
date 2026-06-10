@@ -1,12 +1,12 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
-import { c as countries } from "./router-C8Nm53OG.mjs";
-import { N as Navbar, F as Footer } from "./Footer-BlcwNYKc.mjs";
+import { c as countries } from "./router-CUbQLGxF.mjs";
+import { N as Navbar, F as Footer } from "./Footer-CTttrzV5.mjs";
 import { B as BackButton } from "./BackButton-BRY1BMD-.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
 import { S as Stars } from "./Stars-EMgezo8y.mjs";
 import "../_libs/sonner.mjs";
 import { m as motion } from "../_libs/framer-motion.mjs";
-import { m as Search, n as Calendar, M as MapPin } from "../_libs/lucide-react.mjs";
+import { p as Search, s as Calendar, M as MapPin } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__query-core.mjs";
 import "../_libs/tanstack__react-query.mjs";
 import "../_libs/tanstack__router-core.mjs";
@@ -48,23 +48,22 @@ function CountryCard({ country, index = 0 }) {
                 className: "absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
               }
             ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `absolute inset-0 bg-gradient-to-tr ${country.accent} mix-blend-soft-light opacity-70` }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute inset-x-0 top-0 flex items-center justify-between p-4", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "glass flex items-center gap-1.5 rounded-full px-3 py-1 text-xs", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-1.5 rounded-full bg-black/40 backdrop-blur-sm px-3 py-1 text-xs text-white border border-white/20", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-base leading-none", children: country.flag }),
                 country.region
               ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "glass rounded-full px-3 py-1 text-xs font-semibold", children: country.budget })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "rounded-full bg-black/40 backdrop-blur-sm px-3 py-1 text-xs font-semibold text-white border border-white/20", children: country.budget })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute inset-x-0 bottom-0 p-5", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-2 flex items-center justify-between", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(Stars, { value: country.rating }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[10px] uppercase tracking-[0.2em] text-gold", children: country.budgetLabel })
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[10px] uppercase tracking-[0.2em] text-sky-300", children: country.budgetLabel })
               ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-3xl font-semibold leading-tight", children: country.name }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm text-white/80", children: country.tagline }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-white/70", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-3xl font-semibold leading-tight text-white", children: country.name }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm text-white/90 drop-shadow-sm", children: country.tagline }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-white/80", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1", children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(Calendar, { className: "h-3 w-3" }),
                   " ",
@@ -76,7 +75,7 @@ function CountryCard({ country, index = 0 }) {
                   country.cities.slice(0, 2).join(", ")
                 ] })
               ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "mt-4 inline-flex items-center gap-2 text-sm text-gold opacity-0 transition-all duration-500 group-hover:opacity-100", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "mt-4 inline-flex items-center gap-2 text-sm text-sky-300 opacity-0 transition-all duration-500 group-hover:opacity-100", children: [
                 "Step inside ",
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "transition-transform group-hover:translate-x-1", children: "→" })
               ] })

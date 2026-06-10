@@ -1,7 +1,7 @@
 import { j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
 import { m as motion } from "../_libs/framer-motion.mjs";
-import { G as Globe, H as Heart, r as Compass, s as Camera, l as Star } from "../_libs/lucide-react.mjs";
+import { G as Globe, H as Heart, n as Compass, x as Camera, l as Star } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";
 import "../_libs/tanstack__history.mjs";
 import "../_libs/cookie-es.mjs";

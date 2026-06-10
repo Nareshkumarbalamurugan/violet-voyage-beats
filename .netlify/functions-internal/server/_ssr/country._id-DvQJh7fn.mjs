@@ -1,13 +1,13 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
-import { M as MusicPlatforms } from "./MusicPlatforms-CdnqQNbD.mjs";
-import { N as Navbar, F as Footer } from "./Footer-BlcwNYKc.mjs";
+import { M as MusicPlatforms } from "./MusicPlatforms-D6DEKaYW.mjs";
+import { N as Navbar, F as Footer } from "./Footer-CTttrzV5.mjs";
 import { B as BackButton } from "./BackButton-BRY1BMD-.mjs";
 import { S as Stars } from "./Stars-EMgezo8y.mjs";
-import { R as Route$1 } from "./router-C8Nm53OG.mjs";
+import { R as Route$1 } from "./router-CUbQLGxF.mjs";
 import "../_libs/sonner.mjs";
 import { m as motion } from "../_libs/framer-motion.mjs";
-import { n as Calendar, v as Coins, w as ShieldCheck, M as MapPin, x as Ticket, c as Clock, t as Sparkles, y as Languages, z as Landmark } from "../_libs/lucide-react.mjs";
+import { s as Calendar, Q as Coins, t as ShieldCheck, M as MapPin, N as Ticket, c as Clock, u as Sparkles, R as Languages, U as Landmark } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";
 import "../_libs/tanstack__history.mjs";
 import "../_libs/cookie-es.mjs";
@@ -43,8 +43,7 @@ function CountryPage() {
         duration: 2,
         ease: [0.22, 1, 0.36, 1]
       }, className: "absolute inset-0 h-full w-full object-cover" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-b from-background/40 via-background/30 to-background" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `absolute inset-0 bg-gradient-to-tr ${country.accent} mix-blend-soft-light` }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80" }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative z-10 mx-auto w-full max-w-7xl px-6 pb-20", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.p, { initial: {
           opacity: 0,
@@ -136,32 +135,46 @@ function Fact({
 function FoodTab({
   country
 }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { initial: {
-    opacity: 0,
-    y: 20
-  }, animate: {
-    opacity: 1,
-    y: 0
-  }, transition: {
-    duration: 0.5
-  }, className: "grid gap-6 sm:grid-cols-2 lg:grid-cols-4", children: country.foods.map((f) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { to: "/country/$id/food/$foodId", params: {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { initial: "hidden", animate: "show", variants: {
+    show: {
+      transition: {
+        staggerChildren: 0.08
+      }
+    }
+  }, className: "grid gap-5 sm:grid-cols-2 lg:grid-cols-3", children: country.foods.map((f) => /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { variants: {
+    hidden: {
+      opacity: 0,
+      y: 24
+    },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: [0.22, 1, 0.36, 1]
+      }
+    }
+  }, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { to: "/country/$id/food/$foodId", params: {
     id: country.id,
     foodId: f.id
-  }, className: "card-lift group glass relative block overflow-hidden rounded-3xl", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative aspect-[4/3] overflow-hidden", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: f.image, alt: f.name, loading: "lazy", className: "absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-t from-background/90 to-transparent" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `absolute right-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-medium ${f.diet === "Vegetarian" ? "bg-emerald-500/80 text-white" : f.diet === "Non-Vegetarian" ? "bg-rose-500/80 text-white" : "bg-amber-500/80 text-black"}`, children: f.diet === "Vegetarian" ? "Veg" : f.diet === "Non-Vegetarian" ? "Non-Veg" : "Both" })
+  }, className: "card-lift group glass relative flex h-full flex-col overflow-hidden rounded-3xl p-6", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-primary/20 blur-2xl transition-opacity duration-500 group-hover:opacity-100 opacity-50" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-4 flex items-center justify-between", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider ${f.diet === "Vegetarian" ? "bg-emerald-500/20 text-emerald-300 ring-1 ring-emerald-400/30" : f.diet === "Non-Vegetarian" ? "bg-rose-500/20 text-rose-300 ring-1 ring-rose-400/30" : "bg-amber-500/20 text-amber-300 ring-1 ring-amber-400/30"}`, children: f.diet === "Vegetarian" ? "Veg" : f.diet === "Non-Vegetarian" ? "Non-Veg" : "Veg & Non-Veg" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm", title: `Spice ${f.spice}/5`, children: f.spice > 0 ? "🌶️".repeat(f.spice) : "🥛" })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base font-semibold", children: f.name }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] uppercase tracking-[0.2em] text-gold", children: f.specialty }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 flex items-center justify-between text-xs text-muted-foreground", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: f.priceRange }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "🌶️".repeat(Math.max(1, f.spice)) || "—" })
-      ] })
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-2xl font-semibold leading-tight transition-colors group-hover:text-primary", children: f.name }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-[11px] uppercase tracking-[0.2em] text-gold", children: f.specialty }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 line-clamp-3 text-sm text-muted-foreground", children: f.description }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-5 flex items-center justify-between border-t border-white/10 pt-4 text-xs", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium text-foreground/90", children: f.priceRange }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: f.calories })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "mt-3 inline-flex items-center gap-1 text-xs font-medium text-primary opacity-0 transition-all duration-300 group-hover:opacity-100", children: [
+      "View recipe & spots",
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "transition-transform group-hover:translate-x-1", children: "→" })
     ] })
-  ] }, f.id)) });
+  ] }) }, f.id)) });
 }
 function AttractionsTab({
   country
@@ -177,7 +190,7 @@ function AttractionsTab({
   }, className: "grid gap-6 md:grid-cols-2", children: country.attractions.map((at) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card-lift glass overflow-hidden rounded-3xl", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative aspect-[16/9] overflow-hidden", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: at.image, alt: at.name, loading: "lazy", className: "absolute inset-0 h-full w-full object-cover transition-transform duration-700 hover:scale-105" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute inset-x-0 bottom-0 flex items-end justify-between p-4", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "rounded-full bg-primary/40 px-2.5 py-1 text-[10px] uppercase tracking-wider", children: at.category }),

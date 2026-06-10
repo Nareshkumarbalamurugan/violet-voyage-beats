@@ -1973,6 +1973,9 @@ const featureBundle = {
   ...layout
 };
 const motion = /* @__PURE__ */ createMotionProxy(featureBundle, createDomVisualElement);
+function useMotionValueEvent(value, event, callback) {
+  reactExports.useInsertionEffect(() => value.on(event, callback), [value, event, callback]);
+}
 function canUseNativeTimeline(target) {
   if (typeof window === "undefined")
     return false;
@@ -2602,6 +2605,7 @@ export {
   AnimatePresence as A,
   useSpring as a,
   useTransform as b,
+  useMotionValueEvent as c,
   motion as m,
   useScroll as u
 };

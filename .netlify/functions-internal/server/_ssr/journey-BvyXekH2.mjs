@@ -1,5 +1,5 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
-import { N as Navbar, F as Footer } from "./Footer-BlcwNYKc.mjs";
+import { N as Navbar, F as Footer } from "./Footer-CTttrzV5.mjs";
 import { B as BackButton } from "./BackButton-BRY1BMD-.mjs";
 import "../_libs/sonner.mjs";
 import { m as motion, A as AnimatePresence } from "../_libs/framer-motion.mjs";
@@ -18,7 +18,7 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-import "./router-C8Nm53OG.mjs";
+import "./router-CUbQLGxF.mjs";
 import "../_libs/tanstack__query-core.mjs";
 import "../_libs/tanstack__react-query.mjs";
 import "../_libs/motion-dom.mjs";
@@ -147,7 +147,7 @@ function JourneyPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "card-lift glass overflow-hidden rounded-3xl text-left", children: [
             e.image && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative aspect-[16/9] overflow-hidden", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: e.image, alt: e.location, className: "h-full w-full object-cover" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-t from-black/75 to-transparent" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-5", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [

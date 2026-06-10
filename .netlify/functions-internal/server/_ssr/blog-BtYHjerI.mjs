@@ -1,6 +1,6 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { m as motion, A as AnimatePresence } from "../_libs/framer-motion.mjs";
-import { c as Clock, B as BookOpen, p as ChevronUp, q as ChevronDown } from "../_libs/lucide-react.mjs";
+import { c as Clock, B as BookOpen, w as ChevronUp, o as ChevronDown } from "../_libs/lucide-react.mjs";
 import "../_libs/motion-dom.mjs";
 import "../_libs/motion-utils.mjs";
 const articles = [{

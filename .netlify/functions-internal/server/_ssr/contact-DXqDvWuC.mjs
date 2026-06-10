@@ -1,6 +1,6 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { m as motion } from "../_libs/framer-motion.mjs";
-import { e as CircleCheck, f as CircleAlert, L as LoaderCircle, o as Mail, M as MapPin, c as Clock } from "../_libs/lucide-react.mjs";
+import { e as CircleCheck, f as CircleAlert, L as LoaderCircle, v as Mail, M as MapPin, c as Clock } from "../_libs/lucide-react.mjs";
 import "../_libs/motion-dom.mjs";
 import "../_libs/motion-utils.mjs";
 const info = [{
