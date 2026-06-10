@@ -650,6 +650,22 @@ function GlobePage() {
       {/* ── Hero overlay (first screen, above globe) ── */}
       <div className="relative z-10 flex h-screen flex-col items-center pointer-events-none">
 
+        {/* Exit Globe button — top-left */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.4, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="pointer-events-auto absolute left-4 top-6 z-50"
+        >
+          <Link
+            to="/"
+            className="flex items-center gap-2 rounded-full border border-white/15 bg-black/50 px-4 py-2 text-xs font-semibold text-white/80 backdrop-blur-xl transition-all hover:bg-black/70 hover:text-white hover:scale-105 active:scale-95"
+          >
+            <span className="text-sm leading-none">←</span>
+            Home
+          </Link>
+        </motion.div>
+
         {/* Top bar */}
         <div className="pointer-events-auto w-full px-4 pt-24 flex flex-col items-center gap-4">
           {/* Title */}

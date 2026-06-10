@@ -164,7 +164,7 @@ export function Hero() {
       {/* Content — fades out on scroll */}
       <motion.div
         style={{ opacity: fadeOut }}
-        className="relative z-10 mx-auto max-w-5xl px-6 text-center"
+        className="relative z-10 mx-auto max-w-5xl px-6 pt-24 text-center"
       >
         {/* Badge */}
         <motion.p
