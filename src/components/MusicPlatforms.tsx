@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Play } from "lucide-react";
 import type { MusicTrack } from "@/data/countries";
 
 function SpotifyIcon({ className = "" }: { className?: string }) {
@@ -10,13 +9,13 @@ function SpotifyIcon({ className = "" }: { className?: string }) {
   );
 }
 
-const typeColor: Record<string, string> = {
-  Traditional: "from-amber-400/60 to-rose-500/60",
-  Modern: "from-violet-500/60 to-fuchsia-500/60",
-  Regional: "from-emerald-400/60 to-teal-500/60",
-  Festival: "from-orange-400/60 to-red-500/60",
-  Playlist: "from-sky-400/60 to-indigo-500/60",
-};
+function AppleMusicIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden>
+      <path d="M23.994 6.124a9.23 9.23 0 0 0-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 0 0-1.877-.726 10.496 10.496 0 0 0-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026C4.786.07 4.043.15 3.34.428 2.004.958 1.04 1.88.475 3.208a4.98 4.98 0 0 0-.35 1.49c-.06.534-.086 1.072-.09 1.61-.003.05-.006.1-.008.15v12.083c.003.05.006.1.01.15.013.55.04 1.1.1 1.648.145 1.34.62 2.493 1.549 3.43.904.912 2.01 1.404 3.274 1.59.515.075 1.036.103 1.558.11.017.003.033.007.05.007h12.173l.045-.007c.54-.007 1.078-.034 1.613-.107a5.35 5.35 0 0 0 2.21-.88 5.13 5.13 0 0 0 1.62-1.98c.31-.69.46-1.42.52-2.17.04-.48.057-.962.06-1.443l.003-.083V6.124zM9.792 17.67c-.042.04-.09.07-.138.1a2.35 2.35 0 0 1-1.168.32 2.38 2.38 0 0 1-2.37-2.38 2.38 2.38 0 0 1 2.37-2.38c.43 0 .832.12 1.173.32l.133.085V8.01l6.698-1.56v6.735l-.003.012v2.753l-.003.065a2.38 2.38 0 0 1-2.37 2.38 2.35 2.35 0 0 1-2.37-2.38c0-.86.46-1.613 1.148-2.03V9.47l-3.1.723v5.54a2.382 2.382 0 0 1 .003 1.937z" />
+    </svg>
+  );
+}
 
 export function MusicPlatforms({
   countryName,
@@ -25,19 +24,24 @@ export function MusicPlatforms({
   countryName: string;
   music: MusicTrack[];
 }) {
-  const playlistQ = encodeURIComponent(`${countryName} ${music.map((m) => m.genre).join(" ")}`);
+  const q = encodeURIComponent(`${countryName} music`);
 
   return (
     <div className="glass rounded-3xl p-6 shadow-soft">
       <div className="mb-5 flex items-center justify-between">
-        <h3 className="text-sm uppercase tracking-[0.2em] text-muted-foreground">
-          Sound of {countryName}
-        </h3>
+        <div>
+          <h3 className="text-sm uppercase tracking-[0.2em] text-muted-foreground">
+            Sound of {countryName}
+          </h3>
+          <p className="mt-1 text-xs text-foreground/50">
+            Search on your favourite platform
+          </p>
+        </div>
         <span className="flex items-end gap-0.5" aria-hidden>
           {[0, 1, 2, 3].map((i) => (
             <motion.span
               key={i}
-              className="w-1 rounded-full bg-lavender"
+              className="w-1 rounded-full bg-primary"
               animate={{ height: [6, 16, 9, 18, 6] }}
               transition={{ duration: 1.1, repeat: Infinity, delay: i * 0.15 }}
             />
@@ -45,52 +49,24 @@ export function MusicPlatforms({
         </span>
       </div>
 
-      <div className="space-y-3">
-        {music.map((m) => (
-          <a
-            key={m.genre}
-            href={`https://open.spotify.com/search/${encodeURIComponent(countryName + " " + m.genre)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-4 rounded-2xl border border-white/10 bg-white/5 p-3 transition-colors hover:bg-white/10"
-          >
-            <div
-              className={`grid h-14 w-14 shrink-0 place-items-center rounded-xl bg-gradient-to-br ${
-                typeColor[m.type] ?? typeColor.Modern
-              }`}
-            >
-              <Play className="h-5 w-5 text-white transition-transform group-hover:scale-125" />
-            </div>
-            <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-2">
-                <p className="truncate text-sm font-semibold">{m.genre}</p>
-                <span className="rounded-full bg-white/10 px-2 py-0.5 text-[9px] uppercase tracking-wider text-gold">
-                  {m.type}
-                </span>
-              </div>
-              <p className="truncate text-xs text-muted-foreground">{m.mood}</p>
-              <p className="truncate text-[11px] text-foreground/60">{m.artists.join(" · ")}</p>
-            </div>
-          </a>
-        ))}
-      </div>
-
-      <div className="mt-4 grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-3">
         <a
-          href={`https://open.spotify.com/search/${playlistQ}`}
+          href={`https://open.spotify.com/search/${q}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 rounded-2xl bg-[#1DB954] px-4 py-3 text-sm font-medium text-black transition-transform hover:scale-[1.03]"
+          className="group flex flex-col items-center gap-2 rounded-2xl bg-[#1DB954] px-4 py-5 text-black transition-transform hover:scale-[1.04] active:scale-[0.98]"
         >
-          <SpotifyIcon className="h-5 w-5" /> Spotify
+          <SpotifyIcon className="h-8 w-8" />
+          <span className="text-sm font-semibold">Spotify</span>
         </a>
         <a
-          href={`https://music.apple.com/us/search?term=${playlistQ}`}
+          href={`https://music.apple.com/us/search?term=${q}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 rounded-2xl bg-white px-4 py-3 text-sm font-medium text-black transition-transform hover:scale-[1.03]"
+          className="group flex flex-col items-center gap-2 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-600 px-4 py-5 text-white transition-transform hover:scale-[1.04] active:scale-[0.98]"
         >
-          Apple Music
+          <AppleMusicIcon className="h-8 w-8" />
+          <span className="text-sm font-semibold">Apple Music</span>
         </a>
       </div>
     </div>
