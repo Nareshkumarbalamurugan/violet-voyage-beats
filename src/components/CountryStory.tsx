@@ -36,8 +36,10 @@ export function CountryStory({ country, index }: { country: Country; index: numb
           height={1080}
           className="h-full w-full object-cover"
         />
-        {/* Always-dark overlay so text stays legible in both light and dark mode */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/88" />
+        {/* Dark overlay for dark mode */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/88 [.light_&]:opacity-30" />
+        {/* Extra light wash in light mode so dark text stays legible */}
+        <div className="absolute inset-0 opacity-0 [.light_&]:opacity-100 bg-gradient-to-b from-white/55 via-white/35 to-white/70" />
       </motion.div>
 
       <motion.div
@@ -60,7 +62,7 @@ export function CountryStory({ country, index }: { country: Country; index: numb
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-20%" }}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="text-6xl md:text-8xl font-semibold leading-[0.95] text-white"
+            className="text-6xl md:text-8xl font-semibold leading-[0.95] text-white [.light_&]:text-gray-900"
           >
             {country.name}
           </motion.h2>
@@ -69,7 +71,7 @@ export function CountryStory({ country, index }: { country: Country; index: numb
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-20%" }}
             transition={{ duration: 0.9, delay: 0.15 }}
-            className="mt-6 text-2xl md:text-3xl text-white/95 font-display"
+            className="mt-6 text-2xl md:text-3xl text-white/95 [.light_&]:text-gray-800 font-display"
           >
             {country.tagline}
           </motion.p>
@@ -78,7 +80,7 @@ export function CountryStory({ country, index }: { country: Country; index: numb
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-20%" }}
             transition={{ duration: 0.9, delay: 0.25 }}
-            className="mt-6 max-w-md text-lg text-white/75"
+            className="mt-6 max-w-md text-lg text-white/75 [.light_&]:text-gray-700"
           >
             {country.description}
           </motion.p>
@@ -127,7 +129,7 @@ export function CountryStory({ country, index }: { country: Country; index: numb
                   <Link
                     to="/country/$id/food/$foodId"
                     params={{ id: country.id, foodId: f.id }}
-                    className="block rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-white/90 transition-all hover:bg-primary/30 hover:border-primary/40 hover:scale-105"
+                    className="block rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-white/90 [.light_&]:text-gray-800 [.light_&]:border-gray-400/30 [.light_&]:bg-black/8 transition-all hover:bg-primary/30 hover:border-primary/40 hover:scale-105"
                   >
                     {f.name}
                   </Link>
